@@ -1,11 +1,10 @@
 import React from 'react';
-import { Route, Routes, Link } from 'react-router-dom'; // Removed BrowserRouter alias import
+import { Route, Routes } from 'react-router-dom'; // Removed unused imports
 import Navbar from './components/Navbar';
 import './App.css';
 import TypePractice from './components/TypePractice';
-import SignInPage from './components/SignInPage'; // Adjust the import path as necessary
-import SignUpPage from './components/SignUpPage'
-import UserList from './components/UserList';
+import SignInPage from './components/SignInPage';
+import SignUpPage from './components/SignUpPage';
 
 function App() {
   return (
@@ -15,19 +14,8 @@ function App() {
         TypeAlgo
       </header>
       <Routes>
-        <Route path="/" element={
-          <main className="flex flex-col items-center justify-center min-h-screen">
-            <p className="text-xl">
-              Welcome to TypeAlgo, a place to practice typing with data structures and algorithms!
-            </p>
-            {/* Link to navigate to /type */}
-            <Link to="/type" className="mt-4 bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-              Start Typing Test
-            </Link>
-            <UserList />
-          </main>
-        } />
-        <Route path="/type" element={<TypePractice />} />
+        
+        <Route path="/" element={<TypePractice />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
