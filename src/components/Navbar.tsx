@@ -14,10 +14,10 @@ const Navbar: React.FC = () => {
                 TypeAlgo
               </Link>
               <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-blue-300">
-                Leaderboard
+                {/* Leaderboard */}
               </Link>
               <Link to="/donate" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-blue-300">
-                Donate
+                {/* Donate */}
               </Link>
             </div>
           </div>
