@@ -9,20 +9,18 @@ import ConfigureAmplifyClientSide from './ConfigureAmplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-// Define the App component with optional props for signOut and user
 const App: React.FC = () => {
   return (
     <div className="App">
       <ConfigureAmplifyClientSide />
-      <Navbar />
-      <header className="bg-sky-200 text-white text-4xl p-4">
-        TypeAlgo
-      </header>
-      <Routes>
-        <Route path="/" element={<TypePractice />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-      </Routes>
+        <Navbar />
+        <header className="bg-sky-200 text-white text-4xl p-4">TypeAlgo</header>
+        <Routes>
+          <Route path="/" element={<TypePractice />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Routes>
+
     </div>
   );
 };
