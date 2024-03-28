@@ -234,10 +234,28 @@ useEffect(() => {
   
 
   return (
+    
     // Main container for the application
-    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-800 p-4">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-gray-800 px-4 py-8 md:px-8">
+      {gameStarted && (
+            //Display typing stats when the game is started.
+            <div className="stats flex justify-around items-center w-full max-w-5xl mx-auto mt-30 p-4 bg-gray-800 text-white rounded-lg shadow">
+              <div className="stat">
+                <p className="stat-title text-lg">Time</p>
+                <p className="stat-value text-2xl font-bold">{elapsedTime.toFixed(2)}s</p>
+              </div>
+              <div className="stat">
+                <p className="stat-title text-lg">WPM</p>
+                <p className="stat-value text-2xl font-bold">{wpm.toFixed(2)}</p>
+              </div>
+              <div className="stat">
+                <p className="stat-title text-lg">Accuracy</p>
+                <p className="stat-value text-2xl font-bold">{accuracy.toFixed(2)}%</p>
+              </div>
+            </div>
+          )}
       {!testCompleted && (
-        <div className="selection-container relative top-0 mx-auto w-full max-w-xs z-30 p-4">
+        <div className="selection-container relative top-0 mx-auto w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl z-30 p-4">
           <select
             onChange={handleSelectionChange}
             value={selectedStructure}
@@ -276,7 +294,7 @@ useEffect(() => {
             {gameStarted && (
               <textarea
                 ref={textAreaRef}
-                className="typing-area bg-transparent text-white p-4 outline-none resize-none"
+                className="typing-area bg-transparent text-white p-4 outline-none resize-none w-full md:w-3/4 lg:w-1/2"
                 value={input}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
@@ -294,14 +312,6 @@ useEffect(() => {
               >
                 Start
               </button>
-            </div>
-          )}
-          {gameStarted && (
-            //Display typing stats when the game is started.
-            <div className="stats top-0 right-0 m-4 z-20">
-              <div>Time: {elapsedTime.toFixed(2)}s</div>
-              <div>WPM: {wpm.toFixed(2)}</div>
-              <div>Accuracy: {accuracy.toFixed(2)}%</div>
             </div>
           )}
         </>

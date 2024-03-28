@@ -1,44 +1,21 @@
-import React, { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { signIn } from '@aws-amplify/auth';
+import React from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
 const SignInPage: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      // Correctly pass parameters as a single object to the signIn function
-      const user = await signIn({
-        username: email, // Assuming username is the email
-        password: password,
-      });
-      console.log('Sign in successful', user);
-      navigate('/'); // Redirect upon successful sign in
-    } catch (error) {
-      console.error('Error during sign in:', error);
-    }
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white shadow-md rounded-lg p-6 space-y-4">
-        <h2 className="text-center text-2xl font-semibold text-gray-900">Sign In</h2>
-        <div>
-          <label htmlFor="email" className="text-sm font-medium text-gray-700">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black" />
-        </div>
-        <div>
-          <label htmlFor="password" className="text-sm font-medium text-gray-700">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black" />
-        </div>
-        <button type="submit" className="w-full bg-gray-700 hover:bg-cyan-400 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
-          Sign In
-        </button>
-      </form>
-    </div>
+    <Authenticator>
+      {({ signOut, user }) => (
+        user ? (
+          <div>
+            <h1>Welcome, {}</h1>
+            <button onClick={signOut}>Sign out</button>
+          </div>
+        ) : (
+          <div>Please sign in</div>
+        )
+      )}
+    </Authenticator>
   );
 };
 

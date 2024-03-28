@@ -33,25 +33,13 @@
 }
 
 /* Stats styling */
-.stats {
-  position: fixed; /* Position relative to the viewport */
-  top: 220px; /* Adjust as needed */
-  right: 500px; /* Adjust as needed */
-  min-width: 200px; /* Ensure there's enough room for content */
-  background-color: rgba(67, 68, 68, 0.75);
-  color: #00f2ff; /* Adjust text color for visibility */
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(1, 218, 251, 0.961);
-  z-index: 1000; /* Ensure it's above other content */
 
-}
 
 
 
 .bg-gray-900, .bg-gray-700 {
   background-color: #313030;
-  color: #00f2ff; /* Light text for readability */
+  color: rgb(4, 216, 223); /* Light text for readability */
   padding: 16px;
   border-radius: 8px;
 }
