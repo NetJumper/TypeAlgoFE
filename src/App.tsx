@@ -8,6 +8,14 @@ import './App.css';
 import ConfigureAmplifyClientSide from './configureamplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import amplifyconfig from './amplifyconfiguration.json';
+import { Amplify } from 'aws-amplify';
+
+
+Amplify.configure(amplifyconfig);
+
+
+
 
 const App: React.FC = () => {
   return (
