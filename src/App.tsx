@@ -5,7 +5,7 @@ import TypePractice from './components/TypePractice';
 import SignInPage from './components/SignInPage';
 import SignUpPage from './components/SignUpPage';
 import './App.css';
-import ConfigureAmplifyClientSide from './ConfigureAmplify';
+import ConfigureAmplifyClientSide from './configureamplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
