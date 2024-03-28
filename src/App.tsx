@@ -5,14 +5,10 @@ import TypePractice from './components/TypePractice';
 import SignInPage from './components/SignInPage';
 import SignUpPage from './components/SignUpPage';
 import './App.css';
-import ConfigureAmplifyClientSide from './configureamplify';
+import ConfigureAmplifyClientSide from './ConfigureAmplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import amplifyconfig from './amplifyconfiguration.json';
-import { Amplify } from 'aws-amplify';
 
-
-Amplify.configure(amplifyconfig);
 
 
 
