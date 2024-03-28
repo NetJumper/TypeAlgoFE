@@ -1,13 +1,22 @@
 import React, { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signIn } from 'aws-amplify/auth'; // Assuming this import is correct
 
 const SignInPage: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('Signing in with:', email, password);
-    // Here, you'd replace the console.log with your sign-in logic
+    try {
+      // Adjust the signIn call as per the correct usage
+      const signInResponse = await signIn({ username: email, password });
+      console.log('Sign in successful', signInResponse);
+      navigate('/');
+    } catch (error) {
+      console.error('Error during sign in:', error);
+    }
   };
 
   return (

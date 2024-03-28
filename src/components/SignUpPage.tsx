@@ -1,96 +1,73 @@
 import React, { useState, FormEvent } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { signUp } from 'aws-amplify/auth';
+
+interface SignUpFormData {
+  username: string;
+  password: string;
+  email: string;
+  phone_number?: string; // Optional, assuming you might not always require it
+  validationData?: Record<string, string>; // Optional, for any additional data
+}
 
 const SignUpPage: React.FC = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [formData, setFormData] = useState<SignUpFormData>({
+    username: '',
+    password: '',
+    email: '',
+    phone_number: '', // Initialize it if you plan to use it
+    // validationData can be added as needed
+  });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("handleSubmit called");
-  
-    if (password !== confirmPassword) {
-      console.error("Passwords do not match.");
-      return;
-    }
-  
+
     try {
-      const response = await axios.post('http://localhost:3000/user', {
-        username: name,
+      // Destructure only the required fields if you're not using phone_number or validationData
+      const { username, password, email, phone_number, validationData } = formData;
+      const signUpResponse = await signUp({
+        username, // or email if you use email as username
         password,
+        options: {
+          userAttributes: {
+            email,
+            ...(phone_number && { phone_number }), // Conditionally add phone_number if present
+          },
+          ...(validationData && { validationData }), // Conditionally add validationData if present
+        },
       });
-  
-      console.log('Signup successful', response.data);
-      navigate('/type'); // Use navigate to redirect to the Type page
+
+      console.log('Signup successful', signUpResponse);
+      navigate('/'); // Redirect after successful signup, adjust the path as needed
     } catch (error) {
       console.error('Error during signup:', error);
     }
   };
 
-
+  // Update formData state for each input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-6">
       <form onSubmit={handleSubmit} className="w-full max-w-md bg-white shadow-md rounded-lg p-6 space-y-4">
-        <h2 className="text-center text-2xl font-semibold text-gray-900">Sign Up</h2>
-        {/* Apply consistent styles for text color, cursor, and font family */}
-        <div>
-          <label htmlFor="name" className="text-sm font-medium text-gray-700">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"
-            style={{ fontFamily: 'Arial' }}
-            required
-          />
-        </div>
+        {/* Form fields like email, password, etc. */}
+        {/* Ensure each input has a 'name' attribute matching formData keys */}
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          // Add other input props as needed
+        />
         {/* Repeat for other fields */}
-        {/* Email field */}
-        <div>
-          <label htmlFor="email" className="text-sm font-medium text-gray-700">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"
-            style={{ fontFamily: 'Arial' }}
-            required
-          />
-        </div>
-        {/* Password field */}
-        <div>
-          <label htmlFor="password" className="text-sm font-medium text-gray-700">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"
-            style={{ fontFamily: 'Arial' }}
-            required
-          />
-        </div>
-        {/* Confirm Password field */}
-        <div>
-          <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"
-            style={{ fontFamily: 'Arial' }}
-            required
-          />
-        </div>
-        {/* Submit button */}
         <button type="submit" className="w-full bg-gray-700 hover:bg-cyan-400 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
           Create Account
         </button>

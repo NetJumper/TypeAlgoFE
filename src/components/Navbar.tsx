@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
               <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-blue-300">
                 TypeAlgo
               </Link>
-              {/* Future placeholders for other sections like Leaderboard and Donate, if needed */}
+              {/* Future placeholders*/}
             </div>
           </div>
           {/* Auth Links: Sign In and Sign Up, aligned to the right */}

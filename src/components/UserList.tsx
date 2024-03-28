@@ -1,4 +1,3 @@
-// src/components/UserList.tsx
 import React, { useEffect, useState } from 'react';
 import { fetchUsers } from '../services/UserService';
 
