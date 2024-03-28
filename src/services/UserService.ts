@@ -1,11 +1,7 @@
+// src/services/userService.ts
 import axios from 'axios';
 
 export const fetchUsers = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/users');
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch users:", error);
-    throw error;
-  }
+  const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users`);
+  return response.data;
 };
