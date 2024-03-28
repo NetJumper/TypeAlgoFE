@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signIn } from 'aws-amplify/auth'; // Assuming this import is correct
+import { signIn } from '@aws-amplify/auth';
 
 const SignInPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -10,10 +10,13 @@ const SignInPage: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // Adjust the signIn call as per the correct usage
-      const signInResponse = await signIn({ username: email, password });
-      console.log('Sign in successful', signInResponse);
-      navigate('/');
+      // Correctly pass parameters as a single object to the signIn function
+      const user = await signIn({
+        username: email, // Assuming username is the email
+        password: password,
+      });
+      console.log('Sign in successful', user);
+      navigate('/'); // Redirect upon successful sign in
     } catch (error) {
       console.error('Error during sign in:', error);
     }
@@ -25,25 +28,11 @@ const SignInPage: React.FC = () => {
         <h2 className="text-center text-2xl font-semibold text-gray-900">Sign In</h2>
         <div>
           <label htmlFor="email" className="text-sm font-medium text-gray-700">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"            style={{ fontFamily: 'Arial' }}
-            required
-          />
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black" />
         </div>
         <div>
           <label htmlFor="password" className="text-sm font-medium text-gray-700">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black"            style={{ fontFamily: 'Arial' }}
-            required
-          />
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-cyan-400 focus:border-cyan-400 text-black caret-black" />
         </div>
         <button type="submit" className="w-full bg-gray-700 hover:bg-cyan-400 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
           Sign In
