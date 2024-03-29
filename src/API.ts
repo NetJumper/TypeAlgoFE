@@ -2,18 +2,20 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateLoginInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  email?: string | null,
+  password?: string | null,
+  loginSignUpId?: string | null,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelLoginConditionInput = {
+  email?: ModelStringInput | null,
+  password?: ModelStringInput | null,
+  and?: Array< ModelLoginConditionInput | null > | null,
+  or?: Array< ModelLoginConditionInput | null > | null,
+  not?: ModelLoginConditionInput | null,
+  loginSignUpId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -54,41 +56,6 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
-};
-
-export type Todo = {
-  __typename: "Todo",
-  id: string,
-  name: string,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTodoInput = {
-  id: string,
-  name?: string | null,
-  description?: string | null,
-};
-
-export type DeleteTodoInput = {
-  id: string,
-};
-
-export type CreateLoginInput = {
-  id?: string | null,
-  email?: string | null,
-  password?: string | null,
-  loginSignUpId?: string | null,
-};
-
-export type ModelLoginConditionInput = {
-  email?: ModelStringInput | null,
-  password?: ModelStringInput | null,
-  and?: Array< ModelLoginConditionInput | null > | null,
-  or?: Array< ModelLoginConditionInput | null > | null,
-  not?: ModelLoginConditionInput | null,
-  loginSignUpId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -166,19 +133,69 @@ export type DeleteSignUpInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+export type CreateUserStatsInput = {
+  id?: string | null,
+  name: string,
+  bestTime: number,
+  bestWPM: number,
+  bestAccuracy: number,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
-  nextToken?: string | null,
+export type ModelUserStatsConditionInput = {
+  name?: ModelStringInput | null,
+  bestTime?: ModelFloatInput | null,
+  bestWPM?: ModelIntInput | null,
+  bestAccuracy?: ModelFloatInput | null,
+  and?: Array< ModelUserStatsConditionInput | null > | null,
+  or?: Array< ModelUserStatsConditionInput | null > | null,
+  not?: ModelUserStatsConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type UserStats = {
+  __typename: "UserStats",
+  id: string,
+  name: string,
+  bestTime: number,
+  bestWPM: number,
+  bestAccuracy: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateUserStatsInput = {
+  id: string,
+  name?: string | null,
+  bestTime?: number | null,
+  bestWPM?: number | null,
+  bestAccuracy?: number | null,
+};
+
+export type DeleteUserStatsInput = {
+  id: string,
 };
 
 export type ModelLoginFilterInput = {
@@ -213,12 +230,29 @@ export type ModelSignUpConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelUserStatsFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  bestTime?: ModelFloatInput | null,
+  bestWPM?: ModelIntInput | null,
+  bestAccuracy?: ModelFloatInput | null,
+  and?: Array< ModelUserStatsFilterInput | null > | null,
+  or?: Array< ModelUserStatsFilterInput | null > | null,
+  not?: ModelUserStatsFilterInput | null,
+};
+
+export type ModelUserStatsConnection = {
+  __typename: "ModelUserStatsConnection",
+  items:  Array<UserStats | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSubscriptionLoginFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  email?: ModelSubscriptionStringInput | null,
+  password?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionLoginFilterInput | null > | null,
+  or?: Array< ModelSubscriptionLoginFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -251,14 +285,6 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionLoginFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  password?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionLoginFilterInput | null > | null,
-  or?: Array< ModelSubscriptionLoginFilterInput | null > | null,
-};
-
 export type ModelSubscriptionSignUpFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   email?: ModelSubscriptionStringInput | null,
@@ -268,52 +294,38 @@ export type ModelSubscriptionSignUpFilterInput = {
   or?: Array< ModelSubscriptionSignUpFilterInput | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type ModelSubscriptionUserStatsFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  bestTime?: ModelSubscriptionFloatInput | null,
+  bestWPM?: ModelSubscriptionIntInput | null,
+  bestAccuracy?: ModelSubscriptionFloatInput | null,
+  and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type CreateLoginMutationVariables = {
@@ -445,39 +457,57 @@ export type DeleteSignUpMutation = {
   } | null,
 };
 
-export type GetTodoQueryVariables = {
-  id: string,
+export type CreateUserStatsMutationVariables = {
+  input: CreateUserStatsInput,
+  condition?: ModelUserStatsConditionInput | null,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type CreateUserStatsMutation = {
+  createUserStats?:  {
+    __typename: "UserStats",
     id: string,
     name: string,
-    description?: string | null,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type UpdateUserStatsMutationVariables = {
+  input: UpdateUserStatsInput,
+  condition?: ModelUserStatsConditionInput | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
-    items:  Array< {
-      __typename: "Todo",
-      id: string,
-      name: string,
-      description?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
+export type UpdateUserStatsMutation = {
+  updateUserStats?:  {
+    __typename: "UserStats",
+    id: string,
+    name: string,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserStatsMutationVariables = {
+  input: DeleteUserStatsInput,
+  condition?: ModelUserStatsConditionInput | null,
+};
+
+export type DeleteUserStatsMutation = {
+  deleteUserStats?:  {
+    __typename: "UserStats",
+    id: string,
+    name: string,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -566,48 +596,43 @@ export type ListSignUpsQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type GetUserStatsQueryVariables = {
+  id: string,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type GetUserStatsQuery = {
+  getUserStats?:  {
+    __typename: "UserStats",
     id: string,
     name: string,
-    description?: string | null,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type ListUserStatsQueryVariables = {
+  filter?: ModelUserStatsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-};
-
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
+export type ListUserStatsQuery = {
+  listUserStats?:  {
+    __typename: "ModelUserStatsConnection",
+    items:  Array< {
+      __typename: "UserStats",
+      id: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -729,6 +754,57 @@ export type OnDeleteSignUpSubscription = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserStatsSubscriptionVariables = {
+  filter?: ModelSubscriptionUserStatsFilterInput | null,
+};
+
+export type OnCreateUserStatsSubscription = {
+  onCreateUserStats?:  {
+    __typename: "UserStats",
+    id: string,
+    name: string,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUserStatsSubscriptionVariables = {
+  filter?: ModelSubscriptionUserStatsFilterInput | null,
+};
+
+export type OnUpdateUserStatsSubscription = {
+  onUpdateUserStats?:  {
+    __typename: "UserStats",
+    id: string,
+    name: string,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUserStatsSubscriptionVariables = {
+  filter?: ModelSubscriptionUserStatsFilterInput | null,
+};
+
+export type OnDeleteUserStatsSubscription = {
+  onDeleteUserStats?:  {
+    __typename: "UserStats",
+    id: string,
+    name: string,
+    bestTime: number,
+    bestWPM: number,
+    bestAccuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,

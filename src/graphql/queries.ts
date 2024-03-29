@@ -8,36 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
 export const getLogin = /* GraphQL */ `query GetLogin($id: ID!) {
   getLogin(id: $id) {
     id
@@ -116,4 +86,44 @@ export const listSignUps = /* GraphQL */ `query ListSignUps(
 ` as GeneratedQuery<
   APITypes.ListSignUpsQueryVariables,
   APITypes.ListSignUpsQuery
+>;
+export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
+  getUserStats(id: $id) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetUserStatsQueryVariables,
+  APITypes.GetUserStatsQuery
+>;
+export const listUserStats = /* GraphQL */ `query ListUserStats(
+  $filter: ModelUserStatsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserStats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListUserStatsQueryVariables,
+  APITypes.ListUserStatsQuery
 >;

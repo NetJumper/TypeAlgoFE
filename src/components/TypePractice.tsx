@@ -1,6 +1,11 @@
-import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent, useCallback } from 'react';
 import { dataStructures } from '../data/DataStructures';
 import './TypePractice.css';
+import { addOrUpdateUserStats, fetchUserStatsByName, removeUserStats } from './userStats';
+import { UserStat } from './types'; // Importing the UserStat interface
+
+
+
 
 const TypePractice: React.FC = () => {
   // State variables
@@ -15,6 +20,8 @@ const TypePractice: React.FC = () => {
   const targetText: string = dataStructures[selectedStructure].join('\n'); // Text user needs to type
   const [testCompleted, setTestCompleted] = useState<boolean>(false); // Whether the test is completed
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null); // Reference to the timer interval
+  const [userStats, setUserStats] = useState<UserStat | null>(null);
+  const userName = "exampleUserId";
 
   // Starts a new test
 const startNewTest = () => {
@@ -64,6 +71,36 @@ useEffect(() => {
 }, [gameStarted, testCompleted, textAreaRef]);
 
 
+useEffect(() => {
+  // Load user stats when the component mounts
+  const loadStats = async () => {
+    const stats = await fetchUserStatsByName(userName);
+    setUserStats(stats ?? null);
+  };
+  loadStats();
+}, [userName]);
+
+const handleTestCompletion = useCallback(async () => {
+  // Example stats, replace with actual calculation from the typing test
+  const newStats = {
+    name: userName,
+    bestTime: elapsedTime,
+    bestWPM: wpm,
+    bestAccuracy: accuracy
+  };
+
+  await addOrUpdateUserStats(newStats);
+  // Reload stats to reflect any updates
+  const updatedStats = await fetchUserStatsByName(userName);
+  setUserStats(updatedStats ?? null);
+}, [elapsedTime, wpm, accuracy, userName]);
+
+const handleClearStats = useCallback(async () => {
+  if (userStats?.id) {
+    await removeUserStats(userStats.id);
+    setUserStats(null); // Clear local stats state
+  }
+}, [userStats]);
 
 
 useEffect(() => {
@@ -237,6 +274,31 @@ useEffect(() => {
     
     // Main container for the application
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-800 px-4 py-8 md:px-8">
+
+      {userStats ? (
+            <div className="bg-white shadow overflow-hidden sm:rounded-lg w-full max-w-md p-4 mt-4">
+              <h3 className="text-lg leading-6 font-medium text-gray-900">Your Stats</h3>
+              <div className="border-t border-gray-200">
+                <dl>
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">Best Time</dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{userStats.bestTime} seconds</dd>
+                  </div>
+                  <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">Best WPM</dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{userStats.bestWPM}</dd>
+                  </div>
+                  <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm font-medium text-gray-500">Best Accuracy</dt>
+                    <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{userStats.bestAccuracy}%</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-4 text-gray-400">Complete a test to see your stats!</p>
+          )}
+
       {gameStarted && (
             //Display typing stats when the game is started.
             <div className="stats flex justify-around items-center w-full max-w-5xl mx-auto mt-30 p-4 bg-gray-800 text-white rounded-lg shadow">
@@ -314,9 +376,10 @@ useEffect(() => {
               </button>
             </div>
           )}
-        </>
+        </>       
       )}
     </div>
+    
   );
 };
 

@@ -8,57 +8,6 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  createTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
->;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  updateTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
->;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
-) {
-  deleteTodo(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
->;
 export const createLogin = /* GraphQL */ `mutation CreateLogin(
   $input: CreateLoginInput!
   $condition: ModelLoginConditionInput
@@ -193,4 +142,61 @@ export const deleteSignUp = /* GraphQL */ `mutation DeleteSignUp(
 ` as GeneratedMutation<
   APITypes.DeleteSignUpMutationVariables,
   APITypes.DeleteSignUpMutation
+>;
+export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
+  $input: CreateUserStatsInput!
+  $condition: ModelUserStatsConditionInput
+) {
+  createUserStats(input: $input, condition: $condition) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateUserStatsMutationVariables,
+  APITypes.CreateUserStatsMutation
+>;
+export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
+  $input: UpdateUserStatsInput!
+  $condition: ModelUserStatsConditionInput
+) {
+  updateUserStats(input: $input, condition: $condition) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateUserStatsMutationVariables,
+  APITypes.UpdateUserStatsMutation
+>;
+export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
+  $input: DeleteUserStatsInput!
+  $condition: ModelUserStatsConditionInput
+) {
+  deleteUserStats(input: $input, condition: $condition) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteUserStatsMutationVariables,
+  APITypes.DeleteUserStatsMutation
 >;

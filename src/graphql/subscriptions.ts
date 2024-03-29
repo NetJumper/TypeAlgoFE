@@ -8,48 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onCreateTodo(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
->;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onUpdateTodo(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
->;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onDeleteTodo(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
->;
 export const onCreateLogin = /* GraphQL */ `subscription OnCreateLogin($filter: ModelSubscriptionLoginFilterInput) {
   onCreateLogin(filter: $filter) {
     id
@@ -166,4 +124,52 @@ export const onDeleteSignUp = /* GraphQL */ `subscription OnDeleteSignUp($filter
 ` as GeneratedSubscription<
   APITypes.OnDeleteSignUpSubscriptionVariables,
   APITypes.OnDeleteSignUpSubscription
+>;
+export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
+  onCreateUserStats(filter: $filter) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateUserStatsSubscriptionVariables,
+  APITypes.OnCreateUserStatsSubscription
+>;
+export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
+  onUpdateUserStats(filter: $filter) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateUserStatsSubscriptionVariables,
+  APITypes.OnUpdateUserStatsSubscription
+>;
+export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
+  onDeleteUserStats(filter: $filter) {
+    id
+    name
+    bestTime
+    bestWPM
+    bestAccuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteUserStatsSubscriptionVariables,
+  APITypes.OnDeleteUserStatsSubscription
 >;

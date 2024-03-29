@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TypePractice from './components/TypePractice';
-import SignInPage from './components/SignInPage';
+// import SignInPage from './components/SignInPage';
 // import SignUpPage from './components/SignUpPage';
 import './App.css';
 import ConfigureAmplifyClientSide from './ConfigureAmplify';
@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<TypePractice />} />
-        <Route path="/signin" element={<SignInPage />} />
+        {/* <Route path="/signin" element={<SignInPage />} /> */}
         {/* <Route path="/signup" element={<SignUpPage />} /> */}
       </Routes>
     </div>
