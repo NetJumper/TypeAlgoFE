@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import { dataStructures } from '../data/DataStructures';
 import './TypePractice.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
+
 
 const TypePractice: React.FC = () => {
   const [input, setInput] = useState('');
@@ -110,13 +113,16 @@ const TypePractice: React.FC = () => {
     
     {showInstructions && (
       <div className="instructions-container mb-4 p-4 bg-gray-700 text-white rounded">
-        <p>Type the given text as fast as you can until you complete the whole piece. </p>
-        <p>Press "Tab" to insert four spaces.</p>
-        <p>Use the dropdown to select different text Data Structure and Algorithms.</p>
-        <p>Accuarcy must be 100% spaces as well.</p>
+        <ul className="list-disc list-inside">
+          <li>Type the given text as fast as you can until you complete the whole piece.</li>
+          <li>Press "Enter" to go to a new line.</li>
+          <li>Press "Tab" to insert four spaces.</li>
+          <li>Accuracy must be 100%; spacing must be perfect as well.</li>
+          <li>Use the dropdown to select different text Data Structure and Algorithms.</li>
+          <li>Click over the text area and start typing, have fun!!</li>
+        </ul>
       </div>
     )}
-      
       {showStats && renderStats()}
       <div className="selection-container relative top-0 mx-auto w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl z-30 p-4 mb-8"> 
         <div className="inline-block relative w-full">
@@ -149,6 +155,14 @@ const TypePractice: React.FC = () => {
           onKeyDown={handleKeyDown}
           spellCheck="false"
         ></textarea>
+      </div>
+      <div className="fixed bottom-4 right-4 flex items-center">
+        <a href="https://www.youtube.com/channel/@jkdmasta" target="_blank" rel="noopener noreferrer" className="mr-2">
+          <FontAwesomeIcon icon={faYoutube} size="2x" className="text-red-600 hover:text-red-700" />
+        </a>
+        <a href="https://github.com/NetJumper/TypeAlgoFE" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faGithub} size="2x" className="text-gray-300 hover:text-gray-400" />
+        </a>
       </div>
     </div>
   );
