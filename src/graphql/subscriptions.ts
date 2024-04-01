@@ -20,6 +20,7 @@ export const onCreateLogin = /* GraphQL */ `subscription OnCreateLogin($filter: 
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -44,6 +45,7 @@ export const onUpdateLogin = /* GraphQL */ `subscription OnUpdateLogin($filter: 
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -68,6 +70,7 @@ export const onDeleteLogin = /* GraphQL */ `subscription OnDeleteLogin($filter: 
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -86,8 +89,20 @@ export const onCreateSignUp = /* GraphQL */ `subscription OnCreateSignUp($filter
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -101,8 +116,20 @@ export const onUpdateSignUp = /* GraphQL */ `subscription OnUpdateSignUp($filter
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -116,8 +143,20 @@ export const onDeleteSignUp = /* GraphQL */ `subscription OnDeleteSignUp($filter
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -128,10 +167,21 @@ export const onDeleteSignUp = /* GraphQL */ `subscription OnDeleteSignUp($filter
 export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
   onCreateUserStats(filter: $filter) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -144,10 +194,21 @@ export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats($
 export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
   onUpdateUserStats(filter: $filter) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -160,10 +221,21 @@ export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats($
 export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
   onDeleteUserStats(filter: $filter) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename

@@ -91,6 +91,21 @@ export type SignUp = {
   email?: string | null,
   password?: string | null,
   name?: string | null,
+  userStats?: UserStats | null,
+  createdAt: string,
+  updatedAt: string,
+  signUpUserStatsId?: string | null,
+};
+
+export type UserStats = {
+  __typename: "UserStats",
+  id: string,
+  signUpId: string,
+  name: string,
+  bestTime: number,
+  bestWPM: number,
+  bestAccuracy: number,
+  signUp?: SignUp | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -111,6 +126,7 @@ export type CreateSignUpInput = {
   email?: string | null,
   password?: string | null,
   name?: string | null,
+  signUpUserStatsId?: string | null,
 };
 
 export type ModelSignUpConditionInput = {
@@ -120,6 +136,7 @@ export type ModelSignUpConditionInput = {
   and?: Array< ModelSignUpConditionInput | null > | null,
   or?: Array< ModelSignUpConditionInput | null > | null,
   not?: ModelSignUpConditionInput | null,
+  signUpUserStatsId?: ModelIDInput | null,
 };
 
 export type UpdateSignUpInput = {
@@ -127,6 +144,7 @@ export type UpdateSignUpInput = {
   email?: string | null,
   password?: string | null,
   name?: string | null,
+  signUpUserStatsId?: string | null,
 };
 
 export type DeleteSignUpInput = {
@@ -135,6 +153,7 @@ export type DeleteSignUpInput = {
 
 export type CreateUserStatsInput = {
   id?: string | null,
+  signUpId: string,
   name: string,
   bestTime: number,
   bestWPM: number,
@@ -142,6 +161,7 @@ export type CreateUserStatsInput = {
 };
 
 export type ModelUserStatsConditionInput = {
+  signUpId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   bestTime?: ModelFloatInput | null,
   bestWPM?: ModelIntInput | null,
@@ -175,19 +195,9 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type UserStats = {
-  __typename: "UserStats",
-  id: string,
-  name: string,
-  bestTime: number,
-  bestWPM: number,
-  bestAccuracy: number,
-  createdAt: string,
-  updatedAt: string,
-};
-
 export type UpdateUserStatsInput = {
   id: string,
+  signUpId?: string | null,
   name?: string | null,
   bestTime?: number | null,
   bestWPM?: number | null,
@@ -222,6 +232,7 @@ export type ModelSignUpFilterInput = {
   and?: Array< ModelSignUpFilterInput | null > | null,
   or?: Array< ModelSignUpFilterInput | null > | null,
   not?: ModelSignUpFilterInput | null,
+  signUpUserStatsId?: ModelIDInput | null,
 };
 
 export type ModelSignUpConnection = {
@@ -232,6 +243,7 @@ export type ModelSignUpConnection = {
 
 export type ModelUserStatsFilterInput = {
   id?: ModelIDInput | null,
+  signUpId?: ModelIDInput | null,
   name?: ModelStringInput | null,
   bestTime?: ModelFloatInput | null,
   bestWPM?: ModelIntInput | null,
@@ -246,6 +258,12 @@ export type ModelUserStatsConnection = {
   items:  Array<UserStats | null >,
   nextToken?: string | null,
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelSubscriptionLoginFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -296,6 +314,7 @@ export type ModelSubscriptionSignUpFilterInput = {
 
 export type ModelSubscriptionUserStatsFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  signUpId?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
   bestTime?: ModelSubscriptionFloatInput | null,
   bestWPM?: ModelSubscriptionIntInput | null,
@@ -347,6 +366,7 @@ export type CreateLoginMutation = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -373,6 +393,7 @@ export type UpdateLoginMutation = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -399,6 +420,7 @@ export type DeleteLoginMutation = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -418,8 +440,20 @@ export type CreateSignUpMutation = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -435,8 +469,20 @@ export type UpdateSignUpMutation = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -452,8 +498,20 @@ export type DeleteSignUpMutation = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -466,10 +524,21 @@ export type CreateUserStatsMutation = {
   createUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -484,10 +553,21 @@ export type UpdateUserStatsMutation = {
   updateUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -502,10 +582,21 @@ export type DeleteUserStatsMutation = {
   deleteUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -529,6 +620,7 @@ export type GetLoginQuery = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -569,8 +661,20 @@ export type GetSignUpQuery = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -591,6 +695,7 @@ export type ListSignUpsQuery = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -604,10 +709,21 @@ export type GetUserStatsQuery = {
   getUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -625,6 +741,33 @@ export type ListUserStatsQuery = {
     items:  Array< {
       __typename: "UserStats",
       id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserStatsBySignUpQueryVariables = {
+  signUpId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserStatsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserStatsBySignUpQuery = {
+  userStatsBySignUp?:  {
+    __typename: "ModelUserStatsConnection",
+    items:  Array< {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
       name: string,
       bestTime: number,
       bestWPM: number,
@@ -654,6 +797,7 @@ export type OnCreateLoginSubscription = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -679,6 +823,7 @@ export type OnUpdateLoginSubscription = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -704,6 +849,7 @@ export type OnDeleteLoginSubscription = {
       name?: string | null,
       createdAt: string,
       updatedAt: string,
+      signUpUserStatsId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -722,8 +868,20 @@ export type OnCreateSignUpSubscription = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -738,8 +896,20 @@ export type OnUpdateSignUpSubscription = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -754,8 +924,20 @@ export type OnDeleteSignUpSubscription = {
     email?: string | null,
     password?: string | null,
     name?: string | null,
+    userStats?:  {
+      __typename: "UserStats",
+      id: string,
+      signUpId: string,
+      name: string,
+      bestTime: number,
+      bestWPM: number,
+      bestAccuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
+    signUpUserStatsId?: string | null,
   } | null,
 };
 
@@ -767,10 +949,21 @@ export type OnCreateUserStatsSubscription = {
   onCreateUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -784,10 +977,21 @@ export type OnUpdateUserStatsSubscription = {
   onUpdateUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -801,10 +1005,21 @@ export type OnDeleteUserStatsSubscription = {
   onDeleteUserStats?:  {
     __typename: "UserStats",
     id: string,
+    signUpId: string,
     name: string,
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
+    signUp?:  {
+      __typename: "SignUp",
+      id: string,
+      email?: string | null,
+      password?: string | null,
+      name?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      signUpUserStatsId?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,

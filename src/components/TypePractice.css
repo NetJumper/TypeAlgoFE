@@ -1,61 +1,3 @@
-/* Container styling */
-.flex {
-  display: flex;
-  flex-wrap: nowrap;
-  top: 20px;
-}
-.gap-20 {
-  gap: 20px;
-}
-
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.bg-gray-800 {
-  background-color: #2d2d2d; /* Dark background for contrast */
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-.relative {
-  position: relative;
-}
-
-/* Stats styling */
-
-
-
-
-.bg-gray-900, .bg-gray-700 {
-  background-color: #313030;
-  color: rgb(4, 216, 223); /* Light text for readability */
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.whitespace-pre-wrap {
-  white-space: pre-wrap;
-}
-
-.text-white {
-  color: #f0f0f0;
-}
-
-.outline-none {
-  outline: none;
-}
-
 /* Styling for the typing text */
 .letter, .correct, .incorrect, .current {
   font-family: 'Courier New', Courier, monospace;
@@ -73,35 +15,6 @@
 .current {
   text-decoration: underline;
   text-decoration-color: rgb(0, 221, 255); /* Yellow underline for current letter */
-}
-
-
-/* Start screen overlay with semi-transparency to see the text underneath */
-.start-screen-overlay {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust semi-transparency here */
-  z-index: 10; /* Ensure it's above the text display */
-}
-
-/* Ensure textarea is visible when typing */
-textarea {
-  width: calc(50% - 32px); /* Adjust width accounting for padding */
-  height: 200px; /* Fixed height for the textarea */
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  border: 1px solid #01cafc;
-  border-radius: 8px;
-  padding: 16px;
-  resize: none; /* Disables resizing */
-  opacity: 10; 
 }
 
 .data-structure-container {
@@ -123,5 +36,67 @@ textarea {
   left: 0;
   opacity: 0; /* Make the textarea transparent */
   z-index: 10; /* Ensure it's above the text display */
+}
+
+.stats-overlay {
+  position: fixed; /* or 'absolute', depending on your layout */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.75); /* semi-transparent overlay */
+  color: white;
+  z-index: 100; /* ensures it's above other content */
+
+}
+
+.stats-overlay.hidden {
+  display: none;
+}
+
+.restart-button {
+  background-color: #00e6f6; /* Green background */
+  border: none;
+  color: white; /* White text */
+  padding: 12px 24px; /* Top and bottom padding, Left and right padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; /* Medium text size */
+  margin: 4px 2px; /* Spacing around the button */
+  transition-duration: 0.4s; /* Smooth transition for hover effect */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.restart-button:hover {
+  background-color: #02a4b9; /* Darker shade of green on hover */
+}
+
+
+.custom-select {
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none;    /* For Firefox */
+  appearance: none;         /* Standard syntax */
+  background-image: url('data:image/svg+xml;utf8,<svg ...></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em;
+}
+
+.selection-container {
+  position: relative;
+}
+
+.selection-container::after {
+  content: ''; /* Alternatively, your custom arrow SVG or icon */
+  pointer-events: none;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 

@@ -20,6 +20,7 @@ export const getLogin = /* GraphQL */ `query GetLogin($id: ID!) {
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -58,8 +59,20 @@ export const getSignUp = /* GraphQL */ `query GetSignUp($id: ID!) {
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -77,6 +90,7 @@ export const listSignUps = /* GraphQL */ `query ListSignUps(
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     nextToken
@@ -90,10 +104,21 @@ export const listSignUps = /* GraphQL */ `query ListSignUps(
 export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
   getUserStats(id: $id) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -111,6 +136,7 @@ export const listUserStats = /* GraphQL */ `query ListUserStats(
   listUserStats(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      signUpId
       name
       bestTime
       bestWPM
@@ -126,4 +152,37 @@ export const listUserStats = /* GraphQL */ `query ListUserStats(
 ` as GeneratedQuery<
   APITypes.ListUserStatsQueryVariables,
   APITypes.ListUserStatsQuery
+>;
+export const userStatsBySignUp = /* GraphQL */ `query UserStatsBySignUp(
+  $signUpId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserStatsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userStatsBySignUp(
+    signUpId: $signUpId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UserStatsBySignUpQueryVariables,
+  APITypes.UserStatsBySignUpQuery
 >;

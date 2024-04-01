@@ -10,13 +10,16 @@ type SignUp @model @auth(rules: [{allow: public}]) {
   email: String
   password: String
   name: String
+  userStats: UserStats @hasOne # Establishes a one-to-one relationship to UserStats
 }
-
 
 type UserStats @model @auth(rules: [{allow: public}]) {
   id: ID!
+  signUpId: ID! @index(name: "bySignUp", queryField: "userStatsBySignUp")
   name: String!
   bestTime: Float!
   bestWPM: Int!
   bestAccuracy: Float!
+  signUp: SignUp @belongsTo(fields: ["signUpId"]) # Links back to SignUp
 }
+

@@ -8,6 +8,4 @@ export { default as LoginCreateForm } from "./LoginCreateForm";
 export { default as LoginUpdateForm } from "./LoginUpdateForm";
 export { default as SignUpCreateForm } from "./SignUpCreateForm";
 export { default as SignUpUpdateForm } from "./SignUpUpdateForm";
-export { default as UserStatsCreateForm } from "./UserStatsCreateForm";
-export { default as UserStatsUpdateForm } from "./UserStatsUpdateForm";
 export { default as studioTheme } from "./studioTheme";

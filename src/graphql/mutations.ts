@@ -23,6 +23,7 @@ export const createLogin = /* GraphQL */ `mutation CreateLogin(
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -50,6 +51,7 @@ export const updateLogin = /* GraphQL */ `mutation UpdateLogin(
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -77,6 +79,7 @@ export const deleteLogin = /* GraphQL */ `mutation DeleteLogin(
       name
       createdAt
       updatedAt
+      signUpUserStatsId
       __typename
     }
     createdAt
@@ -98,8 +101,20 @@ export const createSignUp = /* GraphQL */ `mutation CreateSignUp(
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -116,8 +131,20 @@ export const updateSignUp = /* GraphQL */ `mutation UpdateSignUp(
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -134,8 +161,20 @@ export const deleteSignUp = /* GraphQL */ `mutation DeleteSignUp(
     email
     password
     name
+    userStats {
+      id
+      signUpId
+      name
+      bestTime
+      bestWPM
+      bestAccuracy
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
+    signUpUserStatsId
     __typename
   }
 }
@@ -149,10 +188,21 @@ export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
 ) {
   createUserStats(input: $input, condition: $condition) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -168,10 +218,21 @@ export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
 ) {
   updateUserStats(input: $input, condition: $condition) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -187,10 +248,21 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
 ) {
   deleteUserStats(input: $input, condition: $condition) {
     id
+    signUpId
     name
     bestTime
     bestWPM
     bestAccuracy
+    signUp {
+      id
+      email
+      password
+      name
+      createdAt
+      updatedAt
+      signUpUserStatsId
+      __typename
+    }
     createdAt
     updatedAt
     __typename
