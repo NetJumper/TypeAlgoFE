@@ -157,15 +157,15 @@ export type DeleteSignUpInput = {
 export type CreateAttemptInput = {
   id?: string | null,
   userId: string,
+  bestTime: number,
   wpm: number,
-  accuracy: number,
   createdAt?: string | null,
 };
 
 export type ModelAttemptConditionInput = {
   userId?: ModelIDInput | null,
+  bestTime?: ModelFloatInput | null,
   wpm?: ModelIntInput | null,
-  accuracy?: ModelFloatInput | null,
   createdAt?: ModelStringInput | null,
   and?: Array< ModelAttemptConditionInput | null > | null,
   or?: Array< ModelAttemptConditionInput | null > | null,
@@ -173,7 +173,7 @@ export type ModelAttemptConditionInput = {
   updatedAt?: ModelStringInput | null,
 };
 
-export type ModelIntInput = {
+export type ModelFloatInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -185,7 +185,7 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type ModelFloatInput = {
+export type ModelIntInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -201,8 +201,8 @@ export type Attempt = {
   __typename: "Attempt",
   id: string,
   userId: string,
+  bestTime: number,
   wpm: number,
-  accuracy: number,
   createdAt: string,
   updatedAt: string,
 };
@@ -210,8 +210,8 @@ export type Attempt = {
 export type UpdateAttemptInput = {
   id: string,
   userId?: string | null,
+  bestTime?: number | null,
   wpm?: number | null,
-  accuracy?: number | null,
   createdAt?: string | null,
 };
 
@@ -333,8 +333,8 @@ export type ModelSignUpConnection = {
 export type ModelAttemptFilterInput = {
   id?: ModelIDInput | null,
   userId?: ModelIDInput | null,
+  bestTime?: ModelFloatInput | null,
   wpm?: ModelIntInput | null,
-  accuracy?: ModelFloatInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelAttemptFilterInput | null > | null,
@@ -442,15 +442,15 @@ export type ModelSubscriptionSignUpFilterInput = {
 export type ModelSubscriptionAttemptFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   userId?: ModelSubscriptionIDInput | null,
+  bestTime?: ModelSubscriptionFloatInput | null,
   wpm?: ModelSubscriptionIntInput | null,
-  accuracy?: ModelSubscriptionFloatInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionAttemptFilterInput | null > | null,
   or?: Array< ModelSubscriptionAttemptFilterInput | null > | null,
 };
 
-export type ModelSubscriptionIntInput = {
+export type ModelSubscriptionFloatInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -462,7 +462,7 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionFloatInput = {
+export type ModelSubscriptionIntInput = {
   ne?: number | null,
   eq?: number | null,
   le?: number | null,
@@ -676,8 +676,8 @@ export type CreateAttemptMutation = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -693,8 +693,8 @@ export type UpdateAttemptMutation = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -710,8 +710,8 @@ export type DeleteAttemptMutation = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -933,8 +933,8 @@ export type GetAttemptQuery = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -953,8 +953,8 @@ export type ListAttemptsQuery = {
       __typename: "Attempt",
       id: string,
       userId: string,
+      bestTime: number,
       wpm: number,
-      accuracy: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1213,8 +1213,8 @@ export type OnCreateAttemptSubscription = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1229,8 +1229,8 @@ export type OnUpdateAttemptSubscription = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1245,8 +1245,8 @@ export type OnDeleteAttemptSubscription = {
     __typename: "Attempt",
     id: string,
     userId: string,
+    bestTime: number,
     wpm: number,
-    accuracy: number,
     createdAt: string,
     updatedAt: string,
   } | null,

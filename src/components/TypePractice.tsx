@@ -40,7 +40,7 @@ const TypePractice: React.FC = () => {
       const now = Date.now();
       setEndTime(now);
       setShowStats(true);
-      saveAttempt(newValue.length / ((now - startTime) / 1000 / 60), calculateAccuracy());
+      saveAttempt(newValue.length / ((now - startTime) / 1000 / 60), calculateWPM());
     }
   };
 
@@ -99,29 +99,18 @@ const TypePractice: React.FC = () => {
     return 0;
   };
 
-  const calculateAccuracy = (): number => {
-    const targetText = selectedParts.flatMap(part => dataStructures[selectedStructure].parts[part]).join('\n');
-    let correctCharacters = 0;
-    for (let i = 0; i < input.length; i++) {
-      if (input[i] === targetText[i]) {
-        correctCharacters++;
-      }
-    }
-    return (correctCharacters / targetText.length) * 100;
-  };
-
-  const saveAttempt = async (wpm: number, accuracy: number) => {
+  const saveAttempt = async (bestTime: number, wpm: number) => {
     try {
       await client.graphql({
         query: createAttempt,
         variables: {
           input: {
             userId: currentUser.id,
+            bestTime,
             wpm,
-            accuracy,
-            createdAt: new Date().toISOString()
-          }
-        }
+            createdAt: new Date().toISOString(),
+          },
+        },
       });
     } catch (error) {
       console.error('Error saving attempt:', error);
@@ -132,20 +121,12 @@ const TypePractice: React.FC = () => {
     if (endTime && startTime) {
       const elapsedTime = ((endTime - startTime) / 1000).toFixed(2);
       const wpm = calculateWPM();
-      const accuracy = calculateAccuracy();
-      const cpm = (input.length / ((endTime - startTime) / 1000 / 60)).toFixed(2);
-
-      const targetText = selectedParts.flatMap(part => dataStructures[selectedStructure].parts[part]).join('\n');
-      const totalErrors = input.length - (accuracy * targetText.length / 100);
 
       return (
         <div className="stats-overlay">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <p>Time: {elapsedTime} seconds</p>
             <p>WPM: {wpm}</p>
-            <p>CPM: {cpm}</p>
-            <p>Accuracy: {accuracy.toFixed(2)}%</p>
-            <p>Total Errors: {totalErrors.toFixed(2)}</p>
             <button onClick={restartTest} className="restart-button" style={{ marginTop: '20px' }}>Restart</button>
           </div>
         </div>
@@ -159,10 +140,10 @@ const TypePractice: React.FC = () => {
     return text.split('').map((char, index) => {
       let className = 'letter';
       if (index < input.length) {
-        className += input[index] === char ? ' correct' : ' incorrect';
+        className += input[index] === char ? 'correct' : 'incorrect';
       }
       if (index === input.length) {
-        className += ' current';
+        className += 'current';
       }
       return <span key={index} className={className}>{char}</span>;
     });

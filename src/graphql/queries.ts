@@ -105,8 +105,8 @@ export const getAttempt = /* GraphQL */ `query GetAttempt($id: ID!) {
   getAttempt(id: $id) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
@@ -125,8 +125,8 @@ export const listAttempts = /* GraphQL */ `query ListAttempts(
     items {
       id
       userId
+      bestTime
       wpm
-      accuracy
       createdAt
       updatedAt
       __typename

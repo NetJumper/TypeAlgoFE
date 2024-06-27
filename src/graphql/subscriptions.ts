@@ -168,8 +168,8 @@ export const onCreateAttempt = /* GraphQL */ `subscription OnCreateAttempt($filt
   onCreateAttempt(filter: $filter) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
@@ -183,8 +183,8 @@ export const onUpdateAttempt = /* GraphQL */ `subscription OnUpdateAttempt($filt
   onUpdateAttempt(filter: $filter) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
@@ -198,8 +198,8 @@ export const onDeleteAttempt = /* GraphQL */ `subscription OnDeleteAttempt($filt
   onDeleteAttempt(filter: $filter) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename

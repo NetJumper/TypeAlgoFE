@@ -16,8 +16,8 @@ type SignUp @model @auth(rules: [{allow: public}]) {
 type Attempt @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userId: ID!
+  bestTime: Float!
   wpm: Int!
-  accuracy: Float!
   createdAt: AWSDateTime!
 }
 

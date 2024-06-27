@@ -189,8 +189,8 @@ export const createAttempt = /* GraphQL */ `mutation CreateAttempt(
   createAttempt(input: $input, condition: $condition) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
@@ -207,8 +207,8 @@ export const updateAttempt = /* GraphQL */ `mutation UpdateAttempt(
   updateAttempt(input: $input, condition: $condition) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
@@ -225,8 +225,8 @@ export const deleteAttempt = /* GraphQL */ `mutation DeleteAttempt(
   deleteAttempt(input: $input, condition: $condition) {
     id
     userId
+    bestTime
     wpm
-    accuracy
     createdAt
     updatedAt
     __typename
