@@ -2,7 +2,7 @@ type Login @model @auth(rules: [{allow: public}]) {
   id: ID!
   email: String
   password: String
-  SignUp: SignUp @hasOne
+  signUp: SignUp @hasOne
 }
 
 type SignUp @model @auth(rules: [{allow: public}]) {
@@ -10,16 +10,29 @@ type SignUp @model @auth(rules: [{allow: public}]) {
   email: String
   password: String
   name: String
-  userStats: UserStats @hasOne # Establishes a one-to-one relationship to UserStats
+  userStats: UserStats @hasOne
 }
 
-type UserStats @model @auth(rules: [{allow: public}]) {
+type Attempt @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  signUpId: ID! @index(name: "bySignUp", queryField: "userStatsBySignUp")
+  userId: ID!
+  wpm: Int!
+  accuracy: Float!
+  createdAt: AWSDateTime!
+}
+
+type Leaderboard @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userId: ID!
+  maxWpm: Int!
+}
+
+type UserStats @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  signUpId: ID!
   name: String!
   bestTime: Float!
   bestWPM: Int!
   bestAccuracy: Float!
-  signUp: SignUp @belongsTo(fields: ["signUpId"]) # Links back to SignUp
 }
 

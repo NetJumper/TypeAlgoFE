@@ -4,6 +4,16 @@
   font-size: 16px;
 }
 
+/* Add these styles to your TypePractice.css */
+
+.letter.current {
+  background-color: rgb(6, 108, 116); 
+  border-bottom: 2px solid rgb(0, 217, 255); 
+  color: white; 
+
+}
+
+
 .correct {
   color: #0f0; /* Green for correct letters */
 }
@@ -12,10 +22,7 @@
   color: #f00; /* Red for incorrect letters */
 }
 
-.current {
-  text-decoration: underline;
-  text-decoration-color: rgb(0, 221, 255); /* Yellow underline for current letter */
-}
+
 
 .data-structure-container {
   position: relative;
@@ -87,10 +94,6 @@
   background-size: 1.5em;
 }
 
-.selection-container {
-  position: relative;
-}
-
 .selection-container::after {
   content: ''; /* Alternatively, your custom arrow SVG or icon */
   pointer-events: none;
@@ -100,3 +103,71 @@
   transform: translateY(-50%);
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.select-container {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select {
+  appearance: none;
+  background: url('data:image/svg+xml;base64,...') no-repeat right 0.75rem center/1.5em auto, #000;
+  padding-right: 2.5rem; /* Adjust padding to account for the arrow */
+}
+
+.custom-select::-ms-expand {
+  display: none;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inset-y-0 {
+  top: 0;
+  bottom: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.text-gray-400 {
+  color: #cbd5e0;
+}
+
+.fill-current {
+  fill: currentColor;
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #000; /* Ensure background color is set */
+  padding-right: 2.5rem; /* Adjust padding to account for the arrow */
+}
+
+.custom-select::-ms-expand {
+  display: none;
+}

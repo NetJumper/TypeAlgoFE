@@ -15,6 +15,8 @@ export type ModelLoginConditionInput = {
   and?: Array< ModelLoginConditionInput | null > | null,
   or?: Array< ModelLoginConditionInput | null > | null,
   not?: ModelLoginConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   loginSignUpId?: ModelIDInput | null,
 };
 
@@ -79,7 +81,7 @@ export type Login = {
   id: string,
   email?: string | null,
   password?: string | null,
-  SignUp?: SignUp | null,
+  signUp?: SignUp | null,
   createdAt: string,
   updatedAt: string,
   loginSignUpId?: string | null,
@@ -105,7 +107,6 @@ export type UserStats = {
   bestTime: number,
   bestWPM: number,
   bestAccuracy: number,
-  signUp?: SignUp | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -136,6 +137,8 @@ export type ModelSignUpConditionInput = {
   and?: Array< ModelSignUpConditionInput | null > | null,
   or?: Array< ModelSignUpConditionInput | null > | null,
   not?: ModelSignUpConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   signUpUserStatsId?: ModelIDInput | null,
 };
 
@@ -148,6 +151,106 @@ export type UpdateSignUpInput = {
 };
 
 export type DeleteSignUpInput = {
+  id: string,
+};
+
+export type CreateAttemptInput = {
+  id?: string | null,
+  userId: string,
+  wpm: number,
+  accuracy: number,
+  createdAt?: string | null,
+};
+
+export type ModelAttemptConditionInput = {
+  userId?: ModelIDInput | null,
+  wpm?: ModelIntInput | null,
+  accuracy?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelAttemptConditionInput | null > | null,
+  or?: Array< ModelAttemptConditionInput | null > | null,
+  not?: ModelAttemptConditionInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Attempt = {
+  __typename: "Attempt",
+  id: string,
+  userId: string,
+  wpm: number,
+  accuracy: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateAttemptInput = {
+  id: string,
+  userId?: string | null,
+  wpm?: number | null,
+  accuracy?: number | null,
+  createdAt?: string | null,
+};
+
+export type DeleteAttemptInput = {
+  id: string,
+};
+
+export type CreateLeaderboardInput = {
+  id?: string | null,
+  userId: string,
+  maxWpm: number,
+};
+
+export type ModelLeaderboardConditionInput = {
+  userId?: ModelIDInput | null,
+  maxWpm?: ModelIntInput | null,
+  and?: Array< ModelLeaderboardConditionInput | null > | null,
+  or?: Array< ModelLeaderboardConditionInput | null > | null,
+  not?: ModelLeaderboardConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type Leaderboard = {
+  __typename: "Leaderboard",
+  id: string,
+  userId: string,
+  maxWpm: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateLeaderboardInput = {
+  id: string,
+  userId?: string | null,
+  maxWpm?: number | null,
+};
+
+export type DeleteLeaderboardInput = {
   id: string,
 };
 
@@ -169,30 +272,8 @@ export type ModelUserStatsConditionInput = {
   and?: Array< ModelUserStatsConditionInput | null > | null,
   or?: Array< ModelUserStatsConditionInput | null > | null,
   not?: ModelUserStatsConditionInput | null,
-};
-
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateUserStatsInput = {
@@ -212,6 +293,8 @@ export type ModelLoginFilterInput = {
   id?: ModelIDInput | null,
   email?: ModelStringInput | null,
   password?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelLoginFilterInput | null > | null,
   or?: Array< ModelLoginFilterInput | null > | null,
   not?: ModelLoginFilterInput | null,
@@ -229,6 +312,8 @@ export type ModelSignUpFilterInput = {
   email?: ModelStringInput | null,
   password?: ModelStringInput | null,
   name?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelSignUpFilterInput | null > | null,
   or?: Array< ModelSignUpFilterInput | null > | null,
   not?: ModelSignUpFilterInput | null,
@@ -241,6 +326,41 @@ export type ModelSignUpConnection = {
   nextToken?: string | null,
 };
 
+export type ModelAttemptFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  wpm?: ModelIntInput | null,
+  accuracy?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelAttemptFilterInput | null > | null,
+  or?: Array< ModelAttemptFilterInput | null > | null,
+  not?: ModelAttemptFilterInput | null,
+};
+
+export type ModelAttemptConnection = {
+  __typename: "ModelAttemptConnection",
+  items:  Array<Attempt | null >,
+  nextToken?: string | null,
+};
+
+export type ModelLeaderboardFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  maxWpm?: ModelIntInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelLeaderboardFilterInput | null > | null,
+  or?: Array< ModelLeaderboardFilterInput | null > | null,
+  not?: ModelLeaderboardFilterInput | null,
+};
+
+export type ModelLeaderboardConnection = {
+  __typename: "ModelLeaderboardConnection",
+  items:  Array<Leaderboard | null >,
+  nextToken?: string | null,
+};
+
 export type ModelUserStatsFilterInput = {
   id?: ModelIDInput | null,
   signUpId?: ModelIDInput | null,
@@ -248,6 +368,8 @@ export type ModelUserStatsFilterInput = {
   bestTime?: ModelFloatInput | null,
   bestWPM?: ModelIntInput | null,
   bestAccuracy?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelUserStatsFilterInput | null > | null,
   or?: Array< ModelUserStatsFilterInput | null > | null,
   not?: ModelUserStatsFilterInput | null,
@@ -259,18 +381,15 @@ export type ModelUserStatsConnection = {
   nextToken?: string | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelSubscriptionLoginFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   email?: ModelSubscriptionStringInput | null,
   password?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionLoginFilterInput | null > | null,
   or?: Array< ModelSubscriptionLoginFilterInput | null > | null,
+  loginSignUpId?: ModelSubscriptionIDInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -308,31 +427,22 @@ export type ModelSubscriptionSignUpFilterInput = {
   email?: ModelSubscriptionStringInput | null,
   password?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionSignUpFilterInput | null > | null,
   or?: Array< ModelSubscriptionSignUpFilterInput | null > | null,
+  signUpUserStatsId?: ModelSubscriptionIDInput | null,
 };
 
-export type ModelSubscriptionUserStatsFilterInput = {
+export type ModelSubscriptionAttemptFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  signUpId?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  bestTime?: ModelSubscriptionFloatInput | null,
-  bestWPM?: ModelSubscriptionIntInput | null,
-  bestAccuracy?: ModelSubscriptionFloatInput | null,
-  and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
-};
-
-export type ModelSubscriptionFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
+  userId?: ModelSubscriptionIDInput | null,
+  wpm?: ModelSubscriptionIntInput | null,
+  accuracy?: ModelSubscriptionFloatInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionAttemptFilterInput | null > | null,
+  or?: Array< ModelSubscriptionAttemptFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -347,6 +457,41 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionLeaderboardFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userId?: ModelSubscriptionIDInput | null,
+  maxWpm?: ModelSubscriptionIntInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionLeaderboardFilterInput | null > | null,
+  or?: Array< ModelSubscriptionLeaderboardFilterInput | null > | null,
+};
+
+export type ModelSubscriptionUserStatsFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  signUpId?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  bestTime?: ModelSubscriptionFloatInput | null,
+  bestWPM?: ModelSubscriptionIntInput | null,
+  bestAccuracy?: ModelSubscriptionFloatInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
+};
+
 export type CreateLoginMutationVariables = {
   input: CreateLoginInput,
   condition?: ModelLoginConditionInput | null,
@@ -358,7 +503,7 @@ export type CreateLoginMutation = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -385,7 +530,7 @@ export type UpdateLoginMutation = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -412,7 +557,7 @@ export type DeleteLoginMutation = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -515,6 +660,105 @@ export type DeleteSignUpMutation = {
   } | null,
 };
 
+export type CreateAttemptMutationVariables = {
+  input: CreateAttemptInput,
+  condition?: ModelAttemptConditionInput | null,
+};
+
+export type CreateAttemptMutation = {
+  createAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateAttemptMutationVariables = {
+  input: UpdateAttemptInput,
+  condition?: ModelAttemptConditionInput | null,
+};
+
+export type UpdateAttemptMutation = {
+  updateAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteAttemptMutationVariables = {
+  input: DeleteAttemptInput,
+  condition?: ModelAttemptConditionInput | null,
+};
+
+export type DeleteAttemptMutation = {
+  deleteAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLeaderboardMutationVariables = {
+  input: CreateLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
+};
+
+export type CreateLeaderboardMutation = {
+  createLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLeaderboardMutationVariables = {
+  input: UpdateLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
+};
+
+export type UpdateLeaderboardMutation = {
+  updateLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLeaderboardMutationVariables = {
+  input: DeleteLeaderboardInput,
+  condition?: ModelLeaderboardConditionInput | null,
+};
+
+export type DeleteLeaderboardMutation = {
+  deleteLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateUserStatsMutationVariables = {
   input: CreateUserStatsInput,
   condition?: ModelUserStatsConditionInput | null,
@@ -529,16 +773,6 @@ export type CreateUserStatsMutation = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -558,16 +792,6 @@ export type UpdateUserStatsMutation = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -587,16 +811,6 @@ export type DeleteUserStatsMutation = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -612,7 +826,7 @@ export type GetLoginQuery = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -701,6 +915,80 @@ export type ListSignUpsQuery = {
   } | null,
 };
 
+export type GetAttemptQueryVariables = {
+  id: string,
+};
+
+export type GetAttemptQuery = {
+  getAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListAttemptsQueryVariables = {
+  filter?: ModelAttemptFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAttemptsQuery = {
+  listAttempts?:  {
+    __typename: "ModelAttemptConnection",
+    items:  Array< {
+      __typename: "Attempt",
+      id: string,
+      userId: string,
+      wpm: number,
+      accuracy: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetLeaderboardQueryVariables = {
+  id: string,
+};
+
+export type GetLeaderboardQuery = {
+  getLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLeaderboardsQueryVariables = {
+  filter?: ModelLeaderboardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLeaderboardsQuery = {
+  listLeaderboards?:  {
+    __typename: "ModelLeaderboardConnection",
+    items:  Array< {
+      __typename: "Leaderboard",
+      id: string,
+      userId: string,
+      maxWpm: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetUserStatsQueryVariables = {
   id: string,
 };
@@ -714,16 +1002,6 @@ export type GetUserStatsQuery = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -753,32 +1031,6 @@ export type ListUserStatsQuery = {
   } | null,
 };
 
-export type UserStatsBySignUpQueryVariables = {
-  signUpId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelUserStatsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type UserStatsBySignUpQuery = {
-  userStatsBySignUp?:  {
-    __typename: "ModelUserStatsConnection",
-    items:  Array< {
-      __typename: "UserStats",
-      id: string,
-      signUpId: string,
-      name: string,
-      bestTime: number,
-      bestWPM: number,
-      bestAccuracy: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type OnCreateLoginSubscriptionVariables = {
   filter?: ModelSubscriptionLoginFilterInput | null,
 };
@@ -789,7 +1041,7 @@ export type OnCreateLoginSubscription = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -815,7 +1067,7 @@ export type OnUpdateLoginSubscription = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -841,7 +1093,7 @@ export type OnDeleteLoginSubscription = {
     id: string,
     email?: string | null,
     password?: string | null,
-    SignUp?:  {
+    signUp?:  {
       __typename: "SignUp",
       id: string,
       email?: string | null,
@@ -941,6 +1193,99 @@ export type OnDeleteSignUpSubscription = {
   } | null,
 };
 
+export type OnCreateAttemptSubscriptionVariables = {
+  filter?: ModelSubscriptionAttemptFilterInput | null,
+};
+
+export type OnCreateAttemptSubscription = {
+  onCreateAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateAttemptSubscriptionVariables = {
+  filter?: ModelSubscriptionAttemptFilterInput | null,
+};
+
+export type OnUpdateAttemptSubscription = {
+  onUpdateAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteAttemptSubscriptionVariables = {
+  filter?: ModelSubscriptionAttemptFilterInput | null,
+};
+
+export type OnDeleteAttemptSubscription = {
+  onDeleteAttempt?:  {
+    __typename: "Attempt",
+    id: string,
+    userId: string,
+    wpm: number,
+    accuracy: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLeaderboardSubscriptionVariables = {
+  filter?: ModelSubscriptionLeaderboardFilterInput | null,
+};
+
+export type OnCreateLeaderboardSubscription = {
+  onCreateLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLeaderboardSubscriptionVariables = {
+  filter?: ModelSubscriptionLeaderboardFilterInput | null,
+};
+
+export type OnUpdateLeaderboardSubscription = {
+  onUpdateLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLeaderboardSubscriptionVariables = {
+  filter?: ModelSubscriptionLeaderboardFilterInput | null,
+};
+
+export type OnDeleteLeaderboardSubscription = {
+  onDeleteLeaderboard?:  {
+    __typename: "Leaderboard",
+    id: string,
+    userId: string,
+    maxWpm: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
 };
@@ -954,16 +1299,6 @@ export type OnCreateUserStatsSubscription = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -982,16 +1317,6 @@ export type OnUpdateUserStatsSubscription = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1010,16 +1335,6 @@ export type OnDeleteUserStatsSubscription = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    signUp?:  {
-      __typename: "SignUp",
-      id: string,
-      email?: string | null,
-      password?: string | null,
-      name?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      signUpUserStatsId?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -13,7 +13,7 @@ export const onCreateLogin = /* GraphQL */ `subscription OnCreateLogin($filter: 
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -38,7 +38,7 @@ export const onUpdateLogin = /* GraphQL */ `subscription OnUpdateLogin($filter: 
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -63,7 +63,7 @@ export const onDeleteLogin = /* GraphQL */ `subscription OnDeleteLogin($filter: 
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -164,6 +164,99 @@ export const onDeleteSignUp = /* GraphQL */ `subscription OnDeleteSignUp($filter
   APITypes.OnDeleteSignUpSubscriptionVariables,
   APITypes.OnDeleteSignUpSubscription
 >;
+export const onCreateAttempt = /* GraphQL */ `subscription OnCreateAttempt($filter: ModelSubscriptionAttemptFilterInput) {
+  onCreateAttempt(filter: $filter) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateAttemptSubscriptionVariables,
+  APITypes.OnCreateAttemptSubscription
+>;
+export const onUpdateAttempt = /* GraphQL */ `subscription OnUpdateAttempt($filter: ModelSubscriptionAttemptFilterInput) {
+  onUpdateAttempt(filter: $filter) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateAttemptSubscriptionVariables,
+  APITypes.OnUpdateAttemptSubscription
+>;
+export const onDeleteAttempt = /* GraphQL */ `subscription OnDeleteAttempt($filter: ModelSubscriptionAttemptFilterInput) {
+  onDeleteAttempt(filter: $filter) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteAttemptSubscriptionVariables,
+  APITypes.OnDeleteAttemptSubscription
+>;
+export const onCreateLeaderboard = /* GraphQL */ `subscription OnCreateLeaderboard(
+  $filter: ModelSubscriptionLeaderboardFilterInput
+) {
+  onCreateLeaderboard(filter: $filter) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateLeaderboardSubscriptionVariables,
+  APITypes.OnCreateLeaderboardSubscription
+>;
+export const onUpdateLeaderboard = /* GraphQL */ `subscription OnUpdateLeaderboard(
+  $filter: ModelSubscriptionLeaderboardFilterInput
+) {
+  onUpdateLeaderboard(filter: $filter) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateLeaderboardSubscriptionVariables,
+  APITypes.OnUpdateLeaderboardSubscription
+>;
+export const onDeleteLeaderboard = /* GraphQL */ `subscription OnDeleteLeaderboard(
+  $filter: ModelSubscriptionLeaderboardFilterInput
+) {
+  onDeleteLeaderboard(filter: $filter) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteLeaderboardSubscriptionVariables,
+  APITypes.OnDeleteLeaderboardSubscription
+>;
 export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats($filter: ModelSubscriptionUserStatsFilterInput) {
   onCreateUserStats(filter: $filter) {
     id
@@ -172,16 +265,6 @@ export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats($
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -199,16 +282,6 @@ export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats($
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -226,16 +299,6 @@ export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats($
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename

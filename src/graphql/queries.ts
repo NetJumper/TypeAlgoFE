@@ -13,7 +13,7 @@ export const getLogin = /* GraphQL */ `query GetLogin($id: ID!) {
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -101,6 +101,80 @@ export const listSignUps = /* GraphQL */ `query ListSignUps(
   APITypes.ListSignUpsQueryVariables,
   APITypes.ListSignUpsQuery
 >;
+export const getAttempt = /* GraphQL */ `query GetAttempt($id: ID!) {
+  getAttempt(id: $id) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetAttemptQueryVariables,
+  APITypes.GetAttemptQuery
+>;
+export const listAttempts = /* GraphQL */ `query ListAttempts(
+  $filter: ModelAttemptFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAttempts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userId
+      wpm
+      accuracy
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListAttemptsQueryVariables,
+  APITypes.ListAttemptsQuery
+>;
+export const getLeaderboard = /* GraphQL */ `query GetLeaderboard($id: ID!) {
+  getLeaderboard(id: $id) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetLeaderboardQueryVariables,
+  APITypes.GetLeaderboardQuery
+>;
+export const listLeaderboards = /* GraphQL */ `query ListLeaderboards(
+  $filter: ModelLeaderboardFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLeaderboards(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userId
+      maxWpm
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListLeaderboardsQueryVariables,
+  APITypes.ListLeaderboardsQuery
+>;
 export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
   getUserStats(id: $id) {
     id
@@ -109,16 +183,6 @@ export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -152,37 +216,4 @@ export const listUserStats = /* GraphQL */ `query ListUserStats(
 ` as GeneratedQuery<
   APITypes.ListUserStatsQueryVariables,
   APITypes.ListUserStatsQuery
->;
-export const userStatsBySignUp = /* GraphQL */ `query UserStatsBySignUp(
-  $signUpId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelUserStatsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  userStatsBySignUp(
-    signUpId: $signUpId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      signUpId
-      name
-      bestTime
-      bestWPM
-      bestAccuracy
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.UserStatsBySignUpQueryVariables,
-  APITypes.UserStatsBySignUpQuery
 >;

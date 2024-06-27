@@ -16,7 +16,7 @@ export const createLogin = /* GraphQL */ `mutation CreateLogin(
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -44,7 +44,7 @@ export const updateLogin = /* GraphQL */ `mutation UpdateLogin(
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -72,7 +72,7 @@ export const deleteLogin = /* GraphQL */ `mutation DeleteLogin(
     id
     email
     password
-    SignUp {
+    signUp {
       id
       email
       password
@@ -182,6 +182,111 @@ export const deleteSignUp = /* GraphQL */ `mutation DeleteSignUp(
   APITypes.DeleteSignUpMutationVariables,
   APITypes.DeleteSignUpMutation
 >;
+export const createAttempt = /* GraphQL */ `mutation CreateAttempt(
+  $input: CreateAttemptInput!
+  $condition: ModelAttemptConditionInput
+) {
+  createAttempt(input: $input, condition: $condition) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateAttemptMutationVariables,
+  APITypes.CreateAttemptMutation
+>;
+export const updateAttempt = /* GraphQL */ `mutation UpdateAttempt(
+  $input: UpdateAttemptInput!
+  $condition: ModelAttemptConditionInput
+) {
+  updateAttempt(input: $input, condition: $condition) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateAttemptMutationVariables,
+  APITypes.UpdateAttemptMutation
+>;
+export const deleteAttempt = /* GraphQL */ `mutation DeleteAttempt(
+  $input: DeleteAttemptInput!
+  $condition: ModelAttemptConditionInput
+) {
+  deleteAttempt(input: $input, condition: $condition) {
+    id
+    userId
+    wpm
+    accuracy
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteAttemptMutationVariables,
+  APITypes.DeleteAttemptMutation
+>;
+export const createLeaderboard = /* GraphQL */ `mutation CreateLeaderboard(
+  $input: CreateLeaderboardInput!
+  $condition: ModelLeaderboardConditionInput
+) {
+  createLeaderboard(input: $input, condition: $condition) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateLeaderboardMutationVariables,
+  APITypes.CreateLeaderboardMutation
+>;
+export const updateLeaderboard = /* GraphQL */ `mutation UpdateLeaderboard(
+  $input: UpdateLeaderboardInput!
+  $condition: ModelLeaderboardConditionInput
+) {
+  updateLeaderboard(input: $input, condition: $condition) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateLeaderboardMutationVariables,
+  APITypes.UpdateLeaderboardMutation
+>;
+export const deleteLeaderboard = /* GraphQL */ `mutation DeleteLeaderboard(
+  $input: DeleteLeaderboardInput!
+  $condition: ModelLeaderboardConditionInput
+) {
+  deleteLeaderboard(input: $input, condition: $condition) {
+    id
+    userId
+    maxWpm
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteLeaderboardMutationVariables,
+  APITypes.DeleteLeaderboardMutation
+>;
 export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
   $input: CreateUserStatsInput!
   $condition: ModelUserStatsConditionInput
@@ -193,16 +298,6 @@ export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -223,16 +318,6 @@ export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -253,16 +338,6 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
     bestTime
     bestWPM
     bestAccuracy
-    signUp {
-      id
-      email
-      password
-      name
-      createdAt
-      updatedAt
-      signUpUserStatsId
-      __typename
-    }
     createdAt
     updatedAt
     __typename
