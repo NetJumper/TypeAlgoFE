@@ -40,7 +40,9 @@ const TypePractice: React.FC = () => {
       const now = Date.now();
       setEndTime(now);
       setShowStats(true);
-      saveAttempt(newValue.length / ((now - startTime) / 1000 / 60), calculateWPM());
+      const bestTime = (now - startTime) / 1000;
+      const wpm = calculateWPM();
+      saveAttempt(bestTime, wpm);
     }
   };
 
@@ -108,9 +110,9 @@ const TypePractice: React.FC = () => {
             userId: currentUser.id,
             bestTime,
             wpm,
-            createdAt: new Date().toISOString(),
-          },
-        },
+            createdAt: new Date().toISOString()
+          }
+        }
       });
     } catch (error) {
       console.error('Error saving attempt:', error);
@@ -140,10 +142,10 @@ const TypePractice: React.FC = () => {
     return text.split('').map((char, index) => {
       let className = 'letter';
       if (index < input.length) {
-        className += input[index] === char ? 'correct' : 'incorrect';
+        className += input[index] === char ? ' correct' : ' incorrect';
       }
       if (index === input.length) {
-        className += 'current';
+        className += ' current';
       }
       return <span key={index} className={className}>{char}</span>;
     });
