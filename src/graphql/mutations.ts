@@ -244,6 +244,7 @@ export const createLeaderboard = /* GraphQL */ `mutation CreateLeaderboard(
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -261,6 +262,7 @@ export const updateLeaderboard = /* GraphQL */ `mutation UpdateLeaderboard(
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -278,6 +280,7 @@ export const deleteLeaderboard = /* GraphQL */ `mutation DeleteLeaderboard(
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -346,55 +349,4 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
 ` as GeneratedMutation<
   APITypes.DeleteUserStatsMutationVariables,
   APITypes.DeleteUserStatsMutation
->;
-export const createNote = /* GraphQL */ `mutation CreateNote(
-  $input: CreateNoteInput!
-  $condition: ModelNoteConditionInput
-) {
-  createNote(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateNoteMutationVariables,
-  APITypes.CreateNoteMutation
->;
-export const updateNote = /* GraphQL */ `mutation UpdateNote(
-  $input: UpdateNoteInput!
-  $condition: ModelNoteConditionInput
-) {
-  updateNote(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateNoteMutationVariables,
-  APITypes.UpdateNoteMutation
->;
-export const deleteNote = /* GraphQL */ `mutation DeleteNote(
-  $input: DeleteNoteInput!
-  $condition: ModelNoteConditionInput
-) {
-  deleteNote(input: $input, condition: $condition) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteNoteMutationVariables,
-  APITypes.DeleteNoteMutation
 >;

@@ -216,6 +216,7 @@ export const onCreateLeaderboard = /* GraphQL */ `subscription OnCreateLeaderboa
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -232,6 +233,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `subscription OnUpdateLeaderboa
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -248,6 +250,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `subscription OnDeleteLeaderboa
     id
     userId
     bestTime
+    dataStructure
     createdAt
     updatedAt
     __typename
@@ -307,46 +310,4 @@ export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats($
 ` as GeneratedSubscription<
   APITypes.OnDeleteUserStatsSubscriptionVariables,
   APITypes.OnDeleteUserStatsSubscription
->;
-export const onCreateNote = /* GraphQL */ `subscription OnCreateNote($filter: ModelSubscriptionNoteFilterInput) {
-  onCreateNote(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateNoteSubscriptionVariables,
-  APITypes.OnCreateNoteSubscription
->;
-export const onUpdateNote = /* GraphQL */ `subscription OnUpdateNote($filter: ModelSubscriptionNoteFilterInput) {
-  onUpdateNote(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateNoteSubscriptionVariables,
-  APITypes.OnUpdateNoteSubscription
->;
-export const onDeleteNote = /* GraphQL */ `subscription OnDeleteNote($filter: ModelSubscriptionNoteFilterInput) {
-  onDeleteNote(filter: $filter) {
-    id
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteNoteSubscriptionVariables,
-  APITypes.OnDeleteNoteSubscription
 >;

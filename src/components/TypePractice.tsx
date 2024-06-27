@@ -6,7 +6,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Leaderboard from './Leaderboard';
 import PersonalBest from './PersonalBest';
-import { generateClient } from 'aws-amplify/api';
+import { API, graphqlOperation } from 'aws-amplify';
 import { createAttempt } from '../graphql/mutations';
 
 const TypePractice: React.FC = () => {
@@ -19,7 +19,6 @@ const TypePractice: React.FC = () => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
   const currentUser = { id: 'currentUserId', signUpId: 'currentSignUpId' };
-  const client = generateClient();
 
   useEffect(() => {
     textAreaRef.current?.focus();
@@ -112,7 +111,7 @@ const TypePractice: React.FC = () => {
 
   const saveAttempt = async (wpm: number, accuracy: number) => {
     try {
-      await client.graphql({
+      await API.graphql({
         query: createAttempt,
         variables: {
           input: {
@@ -171,14 +170,14 @@ const TypePractice: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-800 px-4 py-8 md:px-8">
       <div className="w-full flex justify-between">
-        <Leaderboard />
+        <Leaderboard dataStructure={selectedStructure} />
         <button
           onClick={() => setShowInstructions(!showInstructions)}
           className="mb-4 text-blue-500 hover:text-blue-700 cursor-pointer u font-bold"
         >
           -How to Play-
         </button>
-        <PersonalBest signUpId={currentUser.signUpId} />
+        <PersonalBest signUpId={currentUser.signUpId} dataStructure={selectedStructure} />
       </div>
       {showInstructions && (
         <div className="instructions-container mb-4 p-4 bg-gray-700 text-white rounded">

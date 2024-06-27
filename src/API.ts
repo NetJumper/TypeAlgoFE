@@ -223,11 +223,13 @@ export type CreateLeaderboardInput = {
   id?: string | null,
   userId: string,
   bestTime: number,
+  dataStructure: string,
 };
 
 export type ModelLeaderboardConditionInput = {
   userId?: ModelIDInput | null,
   bestTime?: ModelFloatInput | null,
+  dataStructure?: ModelStringInput | null,
   and?: Array< ModelLeaderboardConditionInput | null > | null,
   or?: Array< ModelLeaderboardConditionInput | null > | null,
   not?: ModelLeaderboardConditionInput | null,
@@ -240,6 +242,7 @@ export type Leaderboard = {
   id: string,
   userId: string,
   bestTime: number,
+  dataStructure: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -248,6 +251,7 @@ export type UpdateLeaderboardInput = {
   id: string,
   userId?: string | null,
   bestTime?: number | null,
+  dataStructure?: string | null,
 };
 
 export type DeleteLeaderboardInput = {
@@ -286,41 +290,6 @@ export type UpdateUserStatsInput = {
 };
 
 export type DeleteUserStatsInput = {
-  id: string,
-};
-
-export type CreateNoteInput = {
-  id?: string | null,
-  name: string,
-  description?: string | null,
-};
-
-export type ModelNoteConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelNoteConditionInput | null > | null,
-  or?: Array< ModelNoteConditionInput | null > | null,
-  not?: ModelNoteConditionInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-};
-
-export type Note = {
-  __typename: "Note",
-  id: string,
-  name: string,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateNoteInput = {
-  id: string,
-  name?: string | null,
-  description?: string | null,
-};
-
-export type DeleteNoteInput = {
   id: string,
 };
 
@@ -383,6 +352,7 @@ export type ModelLeaderboardFilterInput = {
   id?: ModelIDInput | null,
   userId?: ModelIDInput | null,
   bestTime?: ModelFloatInput | null,
+  dataStructure?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelLeaderboardFilterInput | null > | null,
@@ -413,23 +383,6 @@ export type ModelUserStatsFilterInput = {
 export type ModelUserStatsConnection = {
   __typename: "ModelUserStatsConnection",
   items:  Array<UserStats | null >,
-  nextToken?: string | null,
-};
-
-export type ModelNoteFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelNoteFilterInput | null > | null,
-  or?: Array< ModelNoteFilterInput | null > | null,
-  not?: ModelNoteFilterInput | null,
-};
-
-export type ModelNoteConnection = {
-  __typename: "ModelNoteConnection",
-  items:  Array<Note | null >,
   nextToken?: string | null,
 };
 
@@ -525,6 +478,7 @@ export type ModelSubscriptionLeaderboardFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   userId?: ModelSubscriptionIDInput | null,
   bestTime?: ModelSubscriptionFloatInput | null,
+  dataStructure?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionLeaderboardFilterInput | null > | null,
@@ -542,16 +496,6 @@ export type ModelSubscriptionUserStatsFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
-};
-
-export type ModelSubscriptionNoteFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionNoteFilterInput | null > | null,
-  or?: Array< ModelSubscriptionNoteFilterInput | null > | null,
 };
 
 export type CreateLoginMutationVariables = {
@@ -784,6 +728,7 @@ export type CreateLeaderboardMutation = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -800,6 +745,7 @@ export type UpdateLeaderboardMutation = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -816,6 +762,7 @@ export type DeleteLeaderboardMutation = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -873,54 +820,6 @@ export type DeleteUserStatsMutation = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateNoteMutationVariables = {
-  input: CreateNoteInput,
-  condition?: ModelNoteConditionInput | null,
-};
-
-export type CreateNoteMutation = {
-  createNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateNoteMutationVariables = {
-  input: UpdateNoteInput,
-  condition?: ModelNoteConditionInput | null,
-};
-
-export type UpdateNoteMutation = {
-  updateNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteNoteMutationVariables = {
-  input: DeleteNoteInput,
-  condition?: ModelNoteConditionInput | null,
-};
-
-export type DeleteNoteMutation = {
-  deleteNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1073,6 +972,7 @@ export type GetLeaderboardQuery = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1092,6 +992,7 @@ export type ListLeaderboardsQuery = {
       id: string,
       userId: string,
       bestTime: number,
+      dataStructure: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1134,42 +1035,6 @@ export type ListUserStatsQuery = {
       bestTime: number,
       bestWPM: number,
       bestAccuracy: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetNoteQueryVariables = {
-  id: string,
-};
-
-export type GetNoteQuery = {
-  getNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListNotesQueryVariables = {
-  filter?: ModelNoteFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListNotesQuery = {
-  listNotes?:  {
-    __typename: "ModelNoteConnection",
-    items:  Array< {
-      __typename: "Note",
-      id: string,
-      name: string,
-      description?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1397,6 +1262,7 @@ export type OnCreateLeaderboardSubscription = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1412,6 +1278,7 @@ export type OnUpdateLeaderboardSubscription = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1427,6 +1294,7 @@ export type OnDeleteLeaderboardSubscription = {
     id: string,
     userId: string,
     bestTime: number,
+    dataStructure: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1481,51 +1349,6 @@ export type OnDeleteUserStatsSubscription = {
     bestTime: number,
     bestWPM: number,
     bestAccuracy: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateNoteSubscriptionVariables = {
-  filter?: ModelSubscriptionNoteFilterInput | null,
-};
-
-export type OnCreateNoteSubscription = {
-  onCreateNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateNoteSubscriptionVariables = {
-  filter?: ModelSubscriptionNoteFilterInput | null,
-};
-
-export type OnUpdateNoteSubscription = {
-  onUpdateNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteNoteSubscriptionVariables = {
-  filter?: ModelSubscriptionNoteFilterInput | null,
-};
-
-export type OnDeleteNoteSubscription = {
-  onDeleteNote?:  {
-    __typename: "Note",
-    id: string,
-    name: string,
-    description?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
