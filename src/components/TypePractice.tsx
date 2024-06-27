@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef, ChangeEvent, KeyboardEvent } from 'react';
 import { dataStructures } from '../data/DataStructures';
 import './TypePractice.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Leaderboard from './Leaderboard';
 import PersonalBest from './PersonalBest';
 import { generateClient } from 'aws-amplify/api';
-import { createAttempt, createLeaderboard } from '../graphql/mutations';
-import { getUserStats } from '../graphql/queries';
+import { createAttempt } from '../graphql/mutations';
 
 const TypePractice: React.FC = () => {
   const [input, setInput] = useState('');
@@ -121,25 +123,6 @@ const TypePractice: React.FC = () => {
           }
         }
       });
-
-      const userStatsResponse: any = await client.graphql({
-        query: getUserStats,
-        variables: { id: currentUser.id }
-      });
-
-      const currentBestTime = userStatsResponse.data.getUserStats.bestTime;
-
-      if (!currentBestTime || calculateWPM() > currentBestTime) {
-        await client.graphql({
-          query: createLeaderboard,
-          variables: {
-            input: {
-              userId: currentUser.id,
-              bestTime: calculateWPM()
-            }
-          }
-        });
-      }
     } catch (error) {
       console.error('Error saving attempt:', error);
     }
@@ -213,46 +196,48 @@ const TypePractice: React.FC = () => {
       <div className="selection-container relative top-0 mx-auto w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl z-30 p-4 mb-8">
         <div className="inline-block relative w-full">
           <select
-            value={selectedStructure}
             onChange={handleStructureChange}
-            className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            value={selectedStructure}
+            className="block w-full bg-gray-800 text-white py-2 pl-4 pr-10 rounded leading-tight focus:outline-none custom-select"
           >
-            {Object.keys(dataStructures).map(structure => (
-              <option key={structure} value={structure}>{structure}</option>
+            {Object.keys(dataStructures).map((structure) => (
+              <option key={structure} value={structure} className="bg-gray-700">{dataStructures[structure].name}</option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg className="fill-current h-4 w-4" viewBox="0 0 20 20">
-              <path d="M7 10l5 5 5-5H7z" />
-            </svg>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
         </div>
-        <div className="mt-2">
-          <select
-            multiple
-            value={selectedParts}
-            onChange={handlePartsChange}
-            className="block appearance-none w-full h-40 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline overflow-auto"
-          >
-            {Object.keys(dataStructures[selectedStructure].parts).map(part => (
-              <option key={part} value={part}>{part}</option>
-            ))}
-          </select>
-        </div>
+        <select
+          multiple
+          onChange={handlePartsChange}
+          className="block w-full bg-gray-800 text-white py-2 pl-4 pr-10 rounded leading-tight focus:outline-none custom-select mt-2"
+        >
+          {Object.keys(dataStructures[selectedStructure].parts).map((part) => (
+            <option key={part} value={part} className="bg-gray-700">{part}</option>
+          ))}
+        </select>
       </div>
-      <div className="relative bg-gray-100 shadow-md rounded-lg p-4 md:p-6 w-full max-w-2xl mx-auto">
+      <div className="data-structure-container">
+        <div className={`text-display bg-gray-900 p-4 text-white whitespace-pre-wrap overflow-auto ${input ? 'opacity-100' : 'opacity-50'}`}>
+          {renderText()}
+        </div>
         <textarea
           ref={textAreaRef}
+          className="typing-area bg-transparent text-white p-4 outline-none resize-none w-full md:w-3/4 lg:w-1/2 mt-4 rounded"
           value={input}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          rows={10}
-          className="resize-none w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Start typing here..."
-        />
-        <div className="text-output absolute inset-0 p-4 overflow-hidden text-gray-800">
-          {renderText()}
-        </div>
+          spellCheck="false"
+        ></textarea>
+      </div>
+      <div className="fixed bottom-4 right-4 flex items-center">
+        <a href="https://www.youtube.com/channel/@jkdmasta" target="_blank" rel="noopener noreferrer" className="mr-2">
+          <FontAwesomeIcon icon={faYoutube} size="2x" className="text-red-600 hover:text-red-700" />
+        </a>
+        <a href="https://github.com/NetJumper/TypeAlgoFE" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faGithub} size="2x" className="text-gray-300 hover:text-gray-400" />
+        </a>
       </div>
     </div>
   );
