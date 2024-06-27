@@ -5,8 +5,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-
-
 const Navbar = () => {
     const [isAuthenticatorOpen, setIsAuthenticatorOpen] = useState(false);
 
@@ -27,12 +25,11 @@ const Navbar = () => {
                         <Authenticator>
                             {({ signOut, user }) => (
                                 user ? (
-                                  <div className="flex justify-center items-center">
-                                  <button onClick={signOut} className="focus:outline-none bg-cyan-400 text-white p-2 rounded-lg hover:bg-cyan-600">
-                                      Sign out
-                                  </button>
-                              </div>
-                              
+                                    <div className="flex justify-center items-center">
+                                        <button onClick={signOut} className="focus:outline-none bg-cyan-400 text-white p-2 rounded-lg hover:bg-cyan-600">
+                                            Sign out
+                                        </button>
+                                    </div>
                                 ) : (
                                     // If not signed in, the Authenticator UI is shown
                                     <></>
