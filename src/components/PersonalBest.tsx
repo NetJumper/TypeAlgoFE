@@ -1,6 +1,6 @@
 // PersonalBest.tsx
 import React, { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
 import { getUserStats } from '../graphql/queries';
 
 // Define the type for the user stats
@@ -20,24 +20,27 @@ interface PersonalBestProps {
 }
 
 const PersonalBest: React.FC<PersonalBestProps> = ({ signUpId }) => {
-  const [personalBest, setPersonalBest] = useState<UserStats | null>(null);
+  const [personalBest, setPersonalBest] = useState<any | null>(null);
+  const client = generateClient();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPersonalBest = async () => {
       try {
-        const response: any = await API.graphql(graphqlOperation(getUserStats, { id: signUpId }));
+        const response: any = await client.graphql({
+          query: getUserStats,
+          variables: { id: signUpId }
+        });
         setPersonalBest(response.data.getUserStats);
-      } catch (err) {
-        console.error('Error fetching personal best data:', err);
+      } catch (error) {
+        console.error('Error fetching personal best data:', error);
       }
     };
 
-    fetchData();
-  }, [signUpId]);
+    fetchPersonalBest();
+  }, [signUpId, client]);
 
   return (
     <div>
-      <h2>Personal Best</h2>
       {personalBest ? (
         <div>
           <p>WPM: {personalBest.bestWPM}</p>

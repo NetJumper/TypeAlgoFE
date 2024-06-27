@@ -1,23 +1,23 @@
-// Leaderboard.tsx
 import React, { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
 import { listLeaderboards } from '../graphql/queries';
 
 const Leaderboard = () => {
-  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
+  const client = generateClient();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchLeaderboard = async () => {
       try {
-        const response: any = await API.graphql(graphqlOperation(listLeaderboards));
+        const response: any = await client.graphql({ query: listLeaderboards });
         setLeaderboardData(response.data.listLeaderboards.items);
-      } catch (err) {
-        console.error('Error fetching leaderboard data:', err);
+      } catch (error) {
+        console.error('Error fetching leaderboard data:', error);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchLeaderboard();
+  }, [client]);
 
   return (
     <div>

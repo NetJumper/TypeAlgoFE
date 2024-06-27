@@ -6,7 +6,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Leaderboard from './Leaderboard';
 import PersonalBest from './PersonalBest';
-import { API, graphqlOperation } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
 import { createAttempt } from '../graphql/mutations';
 
 const TypePractice: React.FC = () => {
@@ -19,6 +19,7 @@ const TypePractice: React.FC = () => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
   const currentUser = { id: 'currentUserId', signUpId: 'currentSignUpId' };
+  const client = generateClient();
 
   useEffect(() => {
     textAreaRef.current?.focus();
@@ -111,14 +112,17 @@ const TypePractice: React.FC = () => {
 
   const saveAttempt = async (wpm: number, accuracy: number) => {
     try {
-      await API.graphql(graphqlOperation(createAttempt, {
-        input: {
-          userId: currentUser.id,
-          wpm,
-          accuracy,
-          createdAt: new Date().toISOString()
+      await client.graphql({
+        query: createAttempt,
+        variables: {
+          input: {
+            userId: currentUser.id,
+            wpm,
+            accuracy,
+            createdAt: new Date().toISOString()
+          }
         }
-      }));
+      });
     } catch (error) {
       console.error('Error saving attempt:', error);
     }

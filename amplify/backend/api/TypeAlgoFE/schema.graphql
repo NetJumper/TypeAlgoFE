@@ -36,3 +36,8 @@ type UserStats @model @auth(rules: [{ allow: public }]) {
   bestAccuracy: Float!
 }
 
+type Note @model @auth(rules: [ { allow: public } ] ){
+  id: ID!
+  name: String!
+  description: String
+}
