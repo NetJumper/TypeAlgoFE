@@ -143,7 +143,7 @@ export const getLeaderboard = /* GraphQL */ `query GetLeaderboard($id: ID!) {
   getLeaderboard(id: $id) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename
@@ -162,7 +162,7 @@ export const listLeaderboards = /* GraphQL */ `query ListLeaderboards(
     items {
       id
       userId
-      maxWpm
+      bestTime
       createdAt
       updatedAt
       __typename

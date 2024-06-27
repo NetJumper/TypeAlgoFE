@@ -215,7 +215,7 @@ export const onCreateLeaderboard = /* GraphQL */ `subscription OnCreateLeaderboa
   onCreateLeaderboard(filter: $filter) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename
@@ -231,7 +231,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `subscription OnUpdateLeaderboa
   onUpdateLeaderboard(filter: $filter) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename
@@ -247,7 +247,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `subscription OnDeleteLeaderboa
   onDeleteLeaderboard(filter: $filter) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename

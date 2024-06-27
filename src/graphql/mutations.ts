@@ -243,7 +243,7 @@ export const createLeaderboard = /* GraphQL */ `mutation CreateLeaderboard(
   createLeaderboard(input: $input, condition: $condition) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename
@@ -260,7 +260,7 @@ export const updateLeaderboard = /* GraphQL */ `mutation UpdateLeaderboard(
   updateLeaderboard(input: $input, condition: $condition) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename
@@ -277,7 +277,7 @@ export const deleteLeaderboard = /* GraphQL */ `mutation DeleteLeaderboard(
   deleteLeaderboard(input: $input, condition: $condition) {
     id
     userId
-    maxWpm
+    bestTime
     createdAt
     updatedAt
     __typename

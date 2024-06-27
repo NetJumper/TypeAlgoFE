@@ -222,12 +222,12 @@ export type DeleteAttemptInput = {
 export type CreateLeaderboardInput = {
   id?: string | null,
   userId: string,
-  maxWpm: number,
+  bestTime: number,
 };
 
 export type ModelLeaderboardConditionInput = {
   userId?: ModelIDInput | null,
-  maxWpm?: ModelIntInput | null,
+  bestTime?: ModelFloatInput | null,
   and?: Array< ModelLeaderboardConditionInput | null > | null,
   or?: Array< ModelLeaderboardConditionInput | null > | null,
   not?: ModelLeaderboardConditionInput | null,
@@ -239,7 +239,7 @@ export type Leaderboard = {
   __typename: "Leaderboard",
   id: string,
   userId: string,
-  maxWpm: number,
+  bestTime: number,
   createdAt: string,
   updatedAt: string,
 };
@@ -247,7 +247,7 @@ export type Leaderboard = {
 export type UpdateLeaderboardInput = {
   id: string,
   userId?: string | null,
-  maxWpm?: number | null,
+  bestTime?: number | null,
 };
 
 export type DeleteLeaderboardInput = {
@@ -382,7 +382,7 @@ export type ModelAttemptConnection = {
 export type ModelLeaderboardFilterInput = {
   id?: ModelIDInput | null,
   userId?: ModelIDInput | null,
-  maxWpm?: ModelIntInput | null,
+  bestTime?: ModelFloatInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   and?: Array< ModelLeaderboardFilterInput | null > | null,
@@ -524,7 +524,7 @@ export type ModelSubscriptionFloatInput = {
 export type ModelSubscriptionLeaderboardFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   userId?: ModelSubscriptionIDInput | null,
-  maxWpm?: ModelSubscriptionIntInput | null,
+  bestTime?: ModelSubscriptionFloatInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionLeaderboardFilterInput | null > | null,
@@ -783,7 +783,7 @@ export type CreateLeaderboardMutation = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -799,7 +799,7 @@ export type UpdateLeaderboardMutation = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -815,7 +815,7 @@ export type DeleteLeaderboardMutation = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1072,7 +1072,7 @@ export type GetLeaderboardQuery = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1091,7 +1091,7 @@ export type ListLeaderboardsQuery = {
       __typename: "Leaderboard",
       id: string,
       userId: string,
-      maxWpm: number,
+      bestTime: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1396,7 +1396,7 @@ export type OnCreateLeaderboardSubscription = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1411,7 +1411,7 @@ export type OnUpdateLeaderboardSubscription = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1426,7 +1426,7 @@ export type OnDeleteLeaderboardSubscription = {
     __typename: "Leaderboard",
     id: string,
     userId: string,
-    maxWpm: number,
+    bestTime: number,
     createdAt: string,
     updatedAt: string,
   } | null,
