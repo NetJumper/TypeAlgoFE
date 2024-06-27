@@ -111,17 +111,14 @@ const TypePractice: React.FC = () => {
 
   const saveAttempt = async (wpm: number, accuracy: number) => {
     try {
-      await API.graphql({
-        query: createAttempt,
-        variables: {
-          input: {
-            userId: currentUser.id,
-            wpm,
-            accuracy,
-            createdAt: new Date().toISOString()
-          }
+      await API.graphql(graphqlOperation(createAttempt, {
+        input: {
+          userId: currentUser.id,
+          wpm,
+          accuracy,
+          createdAt: new Date().toISOString()
         }
-      });
+      }));
     } catch (error) {
       console.error('Error saving attempt:', error);
     }

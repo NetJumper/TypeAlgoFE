@@ -12,10 +12,10 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ dataStructure }) => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response: any = await API.graphql(graphqlOperation(listLeaderboards));
-        const allData = response.data.listLeaderboards.items;
-        const filteredData = allData.filter((item: any) => item.dataStructure === dataStructure);
-        setLeaderboardData(filteredData);
+        const response: any = await API.graphql(graphqlOperation(listLeaderboards, {
+          filter: { dataStructure: { eq: dataStructure } }
+        }));
+        setLeaderboardData(response.data.listLeaderboards.items);
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);
       }

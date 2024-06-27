@@ -29,7 +29,7 @@ const PersonalBest: React.FC<PersonalBestProps> = ({ signUpId, dataStructure }) 
 
   return (
     <div>
-      <h3>Personal Best for {dataStructure}</h3>
+      <h2>Personal Best for {dataStructure}</h2>
       <p>{bestTime !== null ? `${bestTime} seconds` : 'No record yet'}</p>
     </div>
   );
