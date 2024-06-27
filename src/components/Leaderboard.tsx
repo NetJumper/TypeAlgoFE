@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
 import { listLeaderboards } from '../graphql/queries';
 
 interface LeaderboardProps {
@@ -8,14 +8,19 @@ interface LeaderboardProps {
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ dataStructure }) => {
   const [leaderboardData, setLeaderboardData] = useState<any[]>([]);
+  const client = generateClient();
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response: any = await API.graphql(graphqlOperation(listLeaderboards, {
-          filter: { dataStructure: { eq: dataStructure } }
-        }));
-        setLeaderboardData(response.data.listLeaderboards.items);
+        const response: any = await client.graphql({ query: listLeaderboards });
+        if (response.data && response.data.listLeaderboards) {
+          const allData = response.data.listLeaderboards.items;
+          const filteredData = allData.filter((item: any) => item.dataStructure === dataStructure);
+          setLeaderboardData(filteredData);
+        } else {
+          console.error('Error fetching leaderboard data:', response.errors);
+        }
       } catch (error) {
         console.error('Error fetching leaderboard data:', error);
       }
