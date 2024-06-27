@@ -21,12 +21,7 @@ const Leaderboard: React.FC = () => {
     };
 
     fetchLeaderboard();
-
-    // Optionally, set an interval to refresh the data
-    const intervalId = setInterval(fetchLeaderboard, 60000); // Refresh every 60 seconds
-
-    return () => clearInterval(intervalId); // Clean up the interval on component unmount
-  }, [client]);
+  }, []); // Empty dependency array ensures this runs only once
 
   return (
     <div>

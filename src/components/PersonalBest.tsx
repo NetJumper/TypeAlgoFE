@@ -7,7 +7,7 @@ interface PersonalBestProps {
 }
 
 const PersonalBest: React.FC<PersonalBestProps> = ({ signUpId }) => {
-  const [bestTime, setBestTime] = useState<number | null>(null);
+  const [personalBest, setPersonalBest] = useState<{ bestTime: number | null }>({ bestTime: null });
   const client = generateClient();
 
   useEffect(() => {
@@ -15,11 +15,11 @@ const PersonalBest: React.FC<PersonalBestProps> = ({ signUpId }) => {
       try {
         const response: any = await client.graphql({
           query: getUserStats,
-          variables: { id: signUpId }
+          variables: { id: signUpId },
         });
 
         if (response.data && response.data.getUserStats) {
-          setBestTime(response.data.getUserStats.bestTime);
+          setPersonalBest(response.data.getUserStats);
         } else {
           console.error('Error fetching personal best data:', response.errors);
         }
@@ -29,20 +29,15 @@ const PersonalBest: React.FC<PersonalBestProps> = ({ signUpId }) => {
     };
 
     fetchPersonalBest();
-
-    // Optionally, set an interval to refresh the data
-    const intervalId = setInterval(fetchPersonalBest, 60000); // Refresh every 60 seconds
-
-    return () => clearInterval(intervalId); // Clean up the interval on component unmount
-  }, [client, signUpId]);
+  }, [signUpId]); // Dependency array with signUpId ensures this runs once when signUpId changes
 
   return (
     <div>
       <h2>Personal Best</h2>
-      {bestTime !== null ? (
-        <p>Best Time: {bestTime} seconds</p>
+      {personalBest.bestTime !== null ? (
+        <p>Best Time: {personalBest.bestTime} seconds</p>
       ) : (
-        <p>No personal best available</p>
+        <p>No data available</p>
       )}
     </div>
   );
