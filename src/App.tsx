@@ -11,6 +11,7 @@ import PersonalBest from './components/PersonalBest';
 
 const App: React.FC = () => {
   const currentUser = { id: 'currentUserId', signUpId: 'currentSignUpId' }; // Replace with actual current user data
+  const selectedDataStructure = "linkedList"; // Replace with actual logic to get selected data structure
 
   return (
     <div className="App">
@@ -19,8 +20,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<TypePractice />} />
         <Route path="/stats" element={<UserStatsComponent />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/personal-best" element={<PersonalBest signUpId={currentUser.signUpId} />} />
+        <Route path="/leaderboard" element={<Leaderboard dataStructure={selectedDataStructure} />} />
+        <Route path="/personal-best" element={<PersonalBest signUpId={currentUser.signUpId} dataStructure={selectedDataStructure} />} />
       </Routes>
     </div>
   );
