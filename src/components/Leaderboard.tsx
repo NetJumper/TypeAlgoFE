@@ -24,7 +24,7 @@ const Leaderboard = () => {
       <h2>Leaderboard</h2>
       <ul>
         {leaderboardData.map((entry: any) => (
-          <li key={entry.id}>User ID: {entry.userId}, Max WPM: {entry.maxWpm}</li>
+          <li key={entry.id}>{entry.userId}: {entry.bestTime} seconds</li>
         ))}
       </ul>
     </div>

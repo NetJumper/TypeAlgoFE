@@ -24,7 +24,7 @@ type Attempt @model @auth(rules: [{ allow: public }]) {
 type Leaderboard @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userId: ID!
-  maxWpm: Int!
+  bestTime: Float!
 }
 
 type UserStats @model @auth(rules: [{ allow: public }]) {
