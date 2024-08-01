@@ -97,7 +97,6 @@ const TypePractice: React.FC = () => {
     if (endTime && startTime) {
       const elapsedTime = ((endTime - startTime) / 1000).toFixed(2);
       const wpm = calculateWPM();
-      const targetText = selectedParts.flatMap(part => dataStructures[selectedStructure].parts[part]).join('\n');
 
       return (
         <div className="stats-overlay">
