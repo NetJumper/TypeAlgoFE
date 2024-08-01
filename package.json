@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/api": "^6.0.38",
-    "@aws-amplify/api-graphql": "^4.1.7",
-    "@aws-amplify/auth": "^6.0.23",
-    "@aws-amplify/ui-react": "^6.1.12",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
@@ -19,7 +15,6 @@
     "@types/node": "^16.18.91",
     "@types/react": "^18.2.69",
     "@types/react-dom": "^18.2.22",
-    "aws-amplify": "^6.3.8",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "env-cmd": "^10.1.0",

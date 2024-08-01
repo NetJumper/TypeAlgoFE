@@ -4,10 +4,6 @@ import './TypePractice.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faYoutube } from '@fortawesome/free-brands-svg-icons';
-import Leaderboard from './Leaderboard';
-import PersonalBest from './PersonalBest';
-import { generateClient } from 'aws-amplify/api';
-import { createAttempt } from '../graphql/mutations';
 
 const TypePractice: React.FC = () => {
   const [input, setInput] = useState('');
@@ -18,8 +14,7 @@ const TypePractice: React.FC = () => {
   const [showStats, setShowStats] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
-  const currentUser = { id: 'currentUserId', signUpId: 'currentSignUpId' };
-  const client = generateClient();
+
 
   useEffect(() => {
     textAreaRef.current?.focus();
@@ -40,9 +35,6 @@ const TypePractice: React.FC = () => {
       const now = Date.now();
       setEndTime(now);
       setShowStats(true);
-      const bestTime = (now - startTime) / 1000;
-      const wpm = calculateWPM();
-      saveAttempt(bestTime, wpm);
     }
   };
 
@@ -101,28 +93,11 @@ const TypePractice: React.FC = () => {
     return 0;
   };
 
-  const saveAttempt = async (bestTime: number, wpm: number) => {
-    try {
-      await client.graphql({
-        query: createAttempt,
-        variables: {
-          input: {
-            userId: currentUser.id,
-            bestTime,
-            wpm,
-            createdAt: new Date().toISOString()
-          }
-        }
-      });
-    } catch (error) {
-      console.error('Error saving attempt:', error);
-    }
-  };
-
   const renderStats = () => {
     if (endTime && startTime) {
       const elapsedTime = ((endTime - startTime) / 1000).toFixed(2);
       const wpm = calculateWPM();
+      const targetText = selectedParts.flatMap(part => dataStructures[selectedStructure].parts[part]).join('\n');
 
       return (
         <div className="stats-overlay">
@@ -153,16 +128,12 @@ const TypePractice: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-800 px-4 py-8 md:px-8">
-      <div className="w-full flex justify-between">
-        <Leaderboard dataStructure={selectedStructure} />
-        <button
-          onClick={() => setShowInstructions(!showInstructions)}
-          className="mb-4 text-blue-500 hover:text-blue-700 cursor-pointer u font-bold"
-        >
-          -How to Play-
-        </button>
-        <PersonalBest signUpId={currentUser.signUpId} dataStructure={selectedStructure} />
-      </div>
+      <button
+        onClick={() => setShowInstructions(!showInstructions)}
+        className="mb-4 text-blue-500 hover:text-blue-700 cursor-pointer u font-bold"
+      >
+        -How to Play-
+      </button>
       {showInstructions && (
         <div className="instructions-container mb-4 p-4 bg-gray-700 text-white rounded">
           <ul className="list-disc list-inside">
